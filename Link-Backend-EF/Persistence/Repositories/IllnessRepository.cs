@@ -25,7 +25,7 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
             return await _context.Illness.FindAsync(id);
         }
-
+        
         public async Task<Illness> FindByNameAsync(string name)
         {
             return await _context.Illness.FirstOrDefaultAsync(i => i.Name == name);

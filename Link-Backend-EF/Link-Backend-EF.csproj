@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -6,6 +6,33 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>Link_Backend_EF</RootNamespace>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Domain\Repositories\IUserDataRepository - Copy %285%29.cs" />
+    <Compile Remove="Domain\Repositories\IUserDataRepository - Copy.cs" />
+    <Compile Remove="Persistence\Repositories\FallRecord.cs" />
+    <Compile Remove="Persistence\Repositories\FallRecordRepository - Copy %282%29.cs" />
+    <Compile Remove="Persistence\Repositories\FallRecordRepository - Copy.cs" />
+    <Compile Remove="Persistence\Repositories\UserInfoRepository.cs" />
+    <Compile Remove="Persistence\Repositories\UserRepository - Copy %282%29.cs" />
+    <Compile Remove="Persistence\Repositories\UserRepository - Copy.cs" />
+    <Compile Remove="Resources\FallRecord.cs" />
+    <Compile Remove="Resources\IllnessResource - Copy %282%29.cs" />
+    <Compile Remove="Resources\IllnessResource - Copy %283%29.cs" />
+    <Compile Remove="Resources\IllnessResource - Copy %284%29.cs" />
+    <Compile Remove="Resources\IllnessResource - Copy %285%29.cs" />
+    <Compile Remove="Resources\IllnessResource - Copy %286%29.cs" />
+    <Compile Remove="Resources\SaveIllnessResource - Copy %284%29.cs" />
+    <Compile Remove="Resources\SaveIllnessResource - Copy %286%29.cs" />
+    <Compile Remove="Resources\SaveIllnessResource - Copy.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Domain\Repositories\NewFile.txt" />
+    <None Remove="Persistence\Repositories\NewFile.txt" />
+    <None Remove="Persistence\Repositories\UserInfoRepository" />
+    <None Remove="Resources\NewFile.txt" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />

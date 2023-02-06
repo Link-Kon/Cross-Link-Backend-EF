@@ -9,6 +9,6 @@
         public string Lastname { get; set; }
         public string UserPhoto { get; set; }
         public int UserId { get; set; }
-        //Falta lista enfermedad
+        List<Illness> Illnesses { get; set; }
     }
 }

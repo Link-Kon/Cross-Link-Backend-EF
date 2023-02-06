@@ -2,29 +2,29 @@
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
-
+ 
 namespace Link_Backend_EF.Services
 {
     public class IllnessService : IIllnessService
     {
-        private readonly IIllnessRepository _illnessRepository;
+        private readonly IIllnessRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public IllnessService(IIllnessRepository illnessRepository, IUnitOfWork unitOfWork)
+        public IllnessService(IIllnessRepository repository, IUnitOfWork unitOfWork)
         {
-            _illnessRepository = illnessRepository;
+            _repository = repository;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<IllnessResponse> DeleteAsync(int id)
         {
-            var result = await _illnessRepository.FindByIdAsync(id);
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new IllnessResponse("Illness not found");
 
             try
             {
-                _illnessRepository.Delete(result);
+                _repository.Delete(result);
                 await _unitOfWork.CompleteAsync();
 
                 return new IllnessResponse(result);
@@ -39,7 +39,7 @@ namespace Link_Backend_EF.Services
         {
             try
             {
-                var result = await _illnessRepository.FindByIdAsync(id);
+                var result = await _repository.FindByIdAsync(id);
                 await _unitOfWork.CompleteAsync();
 
                 return new IllnessResponse(result);
@@ -52,18 +52,18 @@ namespace Link_Backend_EF.Services
 
         public async Task<IEnumerable<Illness>> ListAsync()
         {
-            return await _illnessRepository.ListAsync();
+            return await _repository.ListAsync();
         }
 
         public async Task<IllnessResponse> SaveAsync(Illness illness)
         {
-            var existingIllnessName = await _illnessRepository.FindByNameAsync(illness.Name);
+            var existingIllnessName = await _repository.FindByNameAsync(illness.Name);
             if (existingIllnessName != null)
                 return new IllnessResponse("There is already an illness with this name");
 
             try
             {
-                await _illnessRepository.AddAsync(illness);
+                await _repository.AddAsync(illness);
                 await _unitOfWork.CompleteAsync();
 
                 return new IllnessResponse(illness);
@@ -76,11 +76,11 @@ namespace Link_Backend_EF.Services
 
         public async Task<IllnessResponse> UpdateAsync(int id, Illness illness)
         {
-            var result = await _illnessRepository.FindByIdAsync(id);
+            var result = await _repository.FindByIdAsync(id);
             if (result == null)
                 return new IllnessResponse("Illness not found");
 
-            var existingIllnessName = await _illnessRepository.FindByNameAsync(illness.Name);
+            var existingIllnessName = await _repository.FindByNameAsync(illness.Name);
             if (existingIllnessName != null)
                 return new IllnessResponse("There is already an illness with this name");
 
@@ -90,7 +90,7 @@ namespace Link_Backend_EF.Services
 
             try
             {
-                _illnessRepository.Update(result);
+                _repository.Update(result);
                 await _unitOfWork.CompleteAsync();
 
                 return new IllnessResponse(result);

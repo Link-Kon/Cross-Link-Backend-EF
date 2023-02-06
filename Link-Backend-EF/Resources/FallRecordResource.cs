@@ -1,6 +1,6 @@
-﻿namespace Link_Backend_EF.Domain.Models
+﻿namespace Link_Backend_EF.Resources
 {
-    public class HeartIssuesRecord
+    public class FallRecordResource
     {
         public int Id { get; set; }
         public string LectureDate { get; set; }
