@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Link_Backend_EF.Persistence.Repositories
 {
-    public class UserRepository : BaseRepository, IUserInfoRepository<User>
+    public class UserRepository : BaseRepository, IUserInfoRepository<User>, IUserRepository
     {
         public UserRepository(AppDbContext context) : base(context)
         {
@@ -24,6 +24,11 @@ namespace Link_Backend_EF.Persistence.Repositories
         public async Task<User> FindByIdAsync(int id)
         {
             return await _context.User.FindAsync(id);
+        }
+
+        public async Task<User> FindByCodeAsync(string value)
+        {
+            return await _context.User.FirstOrDefaultAsync(i => i.Code == value);
         }
 
         // Find by Username

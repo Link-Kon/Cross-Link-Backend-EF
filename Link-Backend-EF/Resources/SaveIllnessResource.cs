@@ -8,8 +8,8 @@ namespace Link_Backend_EF.Resources
         public string Name { get; set; }
 
         [Required]
-        public int Description { get; set; }
+        public string Description { get; set; }
 
-        public int? Creator { get; set; }
+        public int? CreatorId { get; set; }
     }
 }

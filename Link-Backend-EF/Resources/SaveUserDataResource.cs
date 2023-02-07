@@ -1,15 +1,18 @@
-﻿namespace Link_Backend_EF.Domain.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Link_Backend_EF.Resources
 {
-    public class UserData
+    public class SaveUserDataResource
     {
-        public int Id { get; set; }
+        [Required]
         public bool Active { get; set; }
+        [Required]
         public string Email { get; set; }
+        [Required]
         public string Names { get; set; }
         public string Lastname { get; set; }
         public string UserPhoto { get; set; }
+        [Required]
         public int UserId { get; set; }
-        public Patient Patient { get; set; }
-        List<Illness> Illnesses { get; set; }
     }
 }

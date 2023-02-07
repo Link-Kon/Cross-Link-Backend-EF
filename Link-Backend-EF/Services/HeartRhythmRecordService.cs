@@ -1,10 +1,11 @@
 ﻿using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
+using Link_Backend_EF.Domain.Services.Communication;
 
 namespace Link_Backend_EF.Services
 {
-    public class HeartRhythmRecordService : IHealthRecordService<HeartRhythmRecord>
+    public class HeartRhythmRecordService : IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse>
     {
         private readonly IHealthRecordRepository<HeartIssuesRecord> _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -14,24 +15,72 @@ namespace Link_Backend_EF.Services
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
-        public Task<HeartRhythmRecord> FindByIdAsync(int id)
+
+        public async Task<HeartRhythmRecordResponse> FindByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _repository.FindByIdAsync(id);
+                await _unitOfWork.CompleteAsync();
+
+                return new HeartRhythmRecordResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new HeartRhythmRecordResponse($"HeartRhythmRecord not found: {e.Message}");
+            }
         }
 
-        public Task<HeartRhythmRecord> FindByPatiendIdAsync(int id)
+        public async Task<HeartRhythmRecordResponse> FindByPatiendIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _repository.FindByPatiendIdAsync(id);
+                await _unitOfWork.CompleteAsync();
+
+                return new HeartRhythmRecordResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new HeartRhythmRecordResponse($"HeartRhythmRecord not found: {e.Message}");
+            }
         }
 
-        public Task SaveAsync(HeartRhythmRecord model)
+        public async Task<HeartRhythmRecordResponse> SaveAsync(HeartRhythmRecord model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _repository.AddAsync(model);
+                await _unitOfWork.CompleteAsync();
+
+                return new HeartRhythmRecordResponse(model);
+            }
+            catch (Exception e)
+            {
+                return new HeartRhythmRecordResponse($"An error ocurred while saving the HeartRhythmRecord: {e.Message}");
+            }
         }
 
-        public void Update(int id, HeartRhythmRecord model)
+        public Task<HeartRhythmRecordResponse> Update(int id, HeartRhythmRecord model)
         {
-            throw new NotImplementedException();
+            var result = await _repository.FindByIdAsync(id);
+            if (result == null)
+                return new HeartRhythmRecordResponse("HeartRhythmRecord not found");
+
+            result.LectureDate = model.LectureDate;
+            result.Bpm = model.Bpm;
+
+            try
+            {
+                _repository.Update(result);
+                await _unitOfWork.CompleteAsync();
+
+                return new HeartRhythmRecordResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new HeartRhythmRecordResponse($"An error occurred while updating the HeartRhythmRecord: {e.Message}");
+            }
         }
     }
 }

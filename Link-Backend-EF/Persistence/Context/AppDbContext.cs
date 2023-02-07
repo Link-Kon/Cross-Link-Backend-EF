@@ -24,6 +24,12 @@ namespace Link_Backend_EF.Persistence.Context
             base.OnModelCreating(builder);
 
             // Constrains
+            builder.Entity<Illness>().ToTable("Illnesses");
+            builder.Entity<Illness>().HasKey(p => p.Id);
+            builder.Entity<Illness>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Illness>().Property(p => p.Name).IsRequired();
+            builder.Entity<Illness>().Property(p => p.Description).IsRequired();
+
 
             builder.UseSnakeCaseNamingConvention();
         }

@@ -1,11 +1,11 @@
 ﻿namespace Link_Backend_EF.Domain.Services
 {
-    public interface IUserInfoService<T>
+    public interface IUserInfoService<T, R>
     {
-        Task SaveAsync(T model);
-        Task<T> FindByIdAsync(int id);
-        Task<T> FindByStringAsync(string value);
-        void Update(int id, T model);
-        void Delete(int id);
+        Task<R> SaveAsync(T model);
+        Task<R> FindByIdAsync(int id);
+        Task<R> FindByStringAsync(string value);
+        Task<R> Update(int id, T model);
+        Task<R> Delete(int id);
     }
 }

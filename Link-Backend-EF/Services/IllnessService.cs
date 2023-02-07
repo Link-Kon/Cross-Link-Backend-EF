@@ -2,7 +2,7 @@
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
- 
+
 namespace Link_Backend_EF.Services
 {
     public class IllnessService : IIllnessService
@@ -86,7 +86,7 @@ namespace Link_Backend_EF.Services
 
             result.Name = illness.Name;
             result.Description = illness.Description;
-            result.Creator = illness.Creator;
+            result.CreatorId = illness.CreatorId;
 
             try
             {

@@ -2,14 +2,17 @@
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveIllnessResource
+    public class SavePatientResource
     {
         [Required]
-        public string Name { get; set; }
-
+        public bool Active { get; set; }
         [Required]
-        public int Description { get; set; }
-
-        public int? Creator { get; set; }
+        public float Weight { get; set; }
+        [Required]
+        public float Height { get; set; }
+        [Required]
+        public string Country { get; set; }
+        [Required]
+        public int UserDataId { get; set; }
     }
 }

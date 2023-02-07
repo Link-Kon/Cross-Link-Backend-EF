@@ -1,11 +1,12 @@
 ﻿using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
+using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Persistence.Repositories;
 
 namespace Link_Backend_EF.Services
 {
-    public class FallRecordService : IHealthRecordService<FallRecord>
+    public class FallRecordService : IHealthRecordService<FallRecord, FallRecordResponse>
     {
         private readonly IHealthRecordRepository<FallRecord> _repository;
         private readonly IUnitOfWork _unitOfWork;
@@ -15,24 +16,72 @@ namespace Link_Backend_EF.Services
             _repository = repository;
             _unitOfWork = unitOfWork;
         }
-        public Task<FallRecord> FindByIdAsync(int id)
+
+        public async Task<FallRecordResponse> FindByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _repository.FindByIdAsync(id);
+                await _unitOfWork.CompleteAsync();
+
+                return new FallRecordResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new FallRecordResponse($"FallRecord not found: {e.Message}");
+            }
         }
 
-        public Task<FallRecord> FindByPatiendIdAsync(int id)
+        public async Task<FallRecordResponse> FindByPatiendIdAsync(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _repository.FindByPatiendIdAsync(id);
+                await _unitOfWork.CompleteAsync();
+
+                return new FallRecordResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new FallRecordResponse($"FallRecord not found: {e.Message}");
+            }
         }
 
-        public Task SaveAsync(FallRecord model)
+        public async Task<FallRecordResponse> SaveAsync(FallRecord model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _repository.AddAsync(model);
+                await _unitOfWork.CompleteAsync();
+
+                return new FallRecordResponse(model);
+            }
+            catch (Exception e)
+            {
+                return new FallRecordResponse($"An error ocurred while saving the FallRecord: {e.Message}");
+            }
         }
 
-        public void Update(int id, FallRecord model)
+        public async Task<FallRecordResponse> Update(int id, FallRecord model)
         {
-            throw new NotImplementedException();
+            var result = await _repository.FindByIdAsync(id);
+            if (result == null)
+                return new FallRecordResponse("FallRecord not found");
+
+            result.LectureDate = model.LectureDate;
+            result.Severity = model.Severity;
+
+            try
+            {
+                _repository.Update(result);
+                await _unitOfWork.CompleteAsync();
+
+                return new FallRecordResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new FallRecordResponse($"An error occurred while updating the FallRecord: {e.Message}");
+            }
         }
     }
 }

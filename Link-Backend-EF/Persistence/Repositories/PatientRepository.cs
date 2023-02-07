@@ -29,7 +29,7 @@ namespace Link_Backend_EF.Persistence.Repositories
         // Find by UserData->Id
         public async Task<Patient> FindByStringAsync(string value)
         {
-            return await _context.Patient.FirstOrDefaultAsync(i => i.UserDataId == value);
+            return await _context.Patient.FirstOrDefaultAsync(i => i.UserDataId.ToString() == value);
         }
 
         public void Update(Patient model)

@@ -3,7 +3,7 @@
     public class FallRecordResource
     {
         public int Id { get; set; }
-        public string LectureDate { get; set; }
+        public DateTime LectureDate { get; set; }
         public string Severity { get; set; }
         public int UserDataId { get; set; }
     }

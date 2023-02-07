@@ -22,7 +22,11 @@
     <Compile Remove="Resources\IllnessResource - Copy %284%29.cs" />
     <Compile Remove="Resources\IllnessResource - Copy %285%29.cs" />
     <Compile Remove="Resources\IllnessResource - Copy %286%29.cs" />
+    <Compile Remove="Resources\IllnessResource - Copy.cs" />
+    <Compile Remove="Resources\SaveIllnessResource - Copy %282%29.cs" />
+    <Compile Remove="Resources\SaveIllnessResource - Copy %283%29.cs" />
     <Compile Remove="Resources\SaveIllnessResource - Copy %284%29.cs" />
+    <Compile Remove="Resources\SaveIllnessResource - Copy %285%29.cs" />
     <Compile Remove="Resources\SaveIllnessResource - Copy %286%29.cs" />
     <Compile Remove="Resources\SaveIllnessResource - Copy.cs" />
   </ItemGroup>
@@ -37,6 +41,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.9" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
       <PrivateAssets>all</PrivateAssets>
@@ -46,6 +51,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
   </ItemGroup>
 
 </Project>

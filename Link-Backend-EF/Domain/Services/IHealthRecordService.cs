@@ -1,10 +1,10 @@
 ﻿namespace Link_Backend_EF.Domain.Services
 {
-    public interface IHealthRecordService<T>
+    public interface IHealthRecordService<T, R>
     {
-        Task SaveAsync(T model);
-        Task<T> FindByIdAsync(int id);
-        Task<T> FindByPatiendIdAsync(int id);
-        void Update(int id, T model);
+        Task<R> SaveAsync(T model);
+        Task<R> FindByIdAsync(int id);
+        Task<R> FindByPatiendIdAsync(int id);
+        Task<R> Update(int id, T model);
     }
 }

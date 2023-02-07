@@ -26,6 +26,11 @@ namespace Link_Backend_EF.Persistence.Repositories
             return await _context.Friendship.FirstOrDefaultAsync(i => i.CaretakerId == id);
         }
 
+        public async Task<Friendship> FindByIdAsync(int id)
+        {
+            return await _context.Friendship.FindAsync(id);
+        }
+
         public async Task<Friendship> FindByPatiendIdAsync(int id)
         {
             return await _context.Friendship.FirstOrDefaultAsync(i => i.PatientId == id);
