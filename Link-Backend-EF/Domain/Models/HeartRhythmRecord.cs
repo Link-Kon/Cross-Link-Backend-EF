@@ -6,5 +6,7 @@
         public DateTime LectureDate { get; set; }
         public string Bpm { get; set; }
         public int UserDataId { get; set; }
+
+        public UserData UserData { get; set; }
     }
 }

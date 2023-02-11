@@ -7,10 +7,10 @@ namespace Link_Backend_EF.Services
 {
     public class HeartRhythmRecordService : IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse>
     {
-        private readonly IHealthRecordRepository<HeartIssuesRecord> _repository;
+        private readonly IHealthRecordRepository<HeartRhythmRecord> _repository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HeartRhythmRecordService(IHealthRecordRepository<HeartIssuesRecord> repository, IUnitOfWork unitOfWork)
+        public HeartRhythmRecordService(IHealthRecordRepository<HeartRhythmRecord> repository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _unitOfWork = unitOfWork;
@@ -61,7 +61,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public Task<HeartRhythmRecordResponse> Update(int id, HeartRhythmRecord model)
+        public async Task<HeartRhythmRecordResponse> Update(int id, HeartRhythmRecord model)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)

@@ -16,7 +16,7 @@ namespace Link_Backend_EF.Services
             _unitOfWork = unitOfWork;
         }
 
-        public Task<HeartIssuesRecordResponse> FindByIdAsync(int id)
+        public async Task<HeartIssuesRecordResponse> FindByIdAsync(int id)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public Task<HeartIssuesRecordResponse> FindByPatiendIdAsync(int id)
+        public async Task<HeartIssuesRecordResponse> FindByPatiendIdAsync(int id)
         {
             try
             {

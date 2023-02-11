@@ -8,6 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\UserDataController - Copy %284%29.cs" />
+    <Compile Remove="Controllers\UserDataController - Copy %285%29.cs" />
+    <Compile Remove="Controllers\UserDataController - Copy.cs" />
     <Compile Remove="Domain\Repositories\IUserDataRepository - Copy %285%29.cs" />
     <Compile Remove="Domain\Repositories\IUserDataRepository - Copy.cs" />
     <Compile Remove="Persistence\Repositories\FallRecord.cs" />
@@ -32,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Controllers\NewFile.txt" />
     <None Remove="Domain\Repositories\NewFile.txt" />
     <None Remove="Persistence\Repositories\NewFile.txt" />
     <None Remove="Persistence\Repositories\UserInfoRepository" />

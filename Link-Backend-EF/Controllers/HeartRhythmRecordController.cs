@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Services;
+using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Extensions;
 using Link_Backend_EF.Resources;
 using Microsoft.AspNetCore.Mvc;
@@ -9,21 +10,21 @@ namespace Link_Backend_EF.Controllers
 {
     [ApiController]
     [Route("/api/[controller]")]
-    public class IllnessController : ControllerBase
+    public class HeartRhythmRecordController : ControllerBase
     {
-        private readonly IIllnessService _service;
+        private readonly IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse> _service;
         private readonly IMapper _mapper;
 
-        public IllnessController(IIllnessService service, IMapper mapper)
+        /*public UserDataController(IUserInfoService iUserInfoService, IMapper mapper)
         {
-            _service = service;
+            _illnessService = illnessService;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IEnumerable<IllnessResource>> GetAllAsync()
         {
-            var illnesses = await _service.ListAsync();
+            var illnesses = await _illnessService.ListAsync();
             var resources = _mapper.Map<IEnumerable<Illness>, IEnumerable<IllnessResource>>(illnesses);
             return resources;
         }
@@ -35,7 +36,7 @@ namespace Link_Backend_EF.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var illness = _mapper.Map<SaveIllnessResource, Illness>(resource);
-            var result = await _service.SaveAsync(illness);
+            var result = await _illnessService.SaveAsync(illness);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -51,7 +52,7 @@ namespace Link_Backend_EF.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var illness = _mapper.Map<SaveIllnessResource, Illness>(resource);
-            var result = await _service.UpdateAsync(id, illness);
+            var result = await _illnessService.UpdateAsync(id, illness);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -63,12 +64,12 @@ namespace Link_Backend_EF.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _service.DeleteAsync(id);
+            var result = await _illnessService.DeleteAsync(id);
             if (!result.Success)
                 return BadRequest(result.Message);
 
             var itemResource = _mapper.Map<Illness, IllnessResource>(result.Resource);
             return Ok(itemResource);
-        }
+        }*/
     }
 }

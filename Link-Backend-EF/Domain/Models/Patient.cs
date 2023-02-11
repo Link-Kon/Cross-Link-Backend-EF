@@ -8,5 +8,7 @@
         public float Height { get; set; }
         public string Country { get; set; }
         public int UserDataId { get; set; }
+
+        public UserData UserData { get; set; }
     }
 }
