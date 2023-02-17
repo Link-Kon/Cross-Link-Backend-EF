@@ -7,7 +7,7 @@
         public string Description { get; set; }
         public int? CreatorId { get; set; }
 
-        public UserData? Creator { get; set; }
+        //public UserData? Creator { get; set; }
         public List<UserData> UsersData { get; set; }
     }
 }

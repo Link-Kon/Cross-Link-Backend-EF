@@ -5,10 +5,10 @@ namespace Link_Backend_EF.Domain.Repositories
     public interface IIllnessRepository
     {
         Task<IEnumerable<Illness>> ListAsync();
-        Task AddAsync(Illness illness);
+        Task AddAsync(Illness model);
         Task<Illness> FindByIdAsync(int id);
         Task<Illness> FindByNameAsync(string name);
-        void Update(Illness illness);
-        void Delete(Illness illness);
+        void Update(Illness model);
+        void Delete(Illness model);
     }
 }

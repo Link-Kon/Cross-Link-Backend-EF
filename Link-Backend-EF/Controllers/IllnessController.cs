@@ -23,8 +23,8 @@ namespace Link_Backend_EF.Controllers
         [HttpGet]
         public async Task<IEnumerable<IllnessResource>> GetAllAsync()
         {
-            var illnesses = await _service.ListAsync();
-            var resources = _mapper.Map<IEnumerable<Illness>, IEnumerable<IllnessResource>>(illnesses);
+            var models = await _service.ListAsync();
+            var resources = _mapper.Map<IEnumerable<Illness>, IEnumerable<IllnessResource>>(models);
             return resources;
         }
 
@@ -34,8 +34,8 @@ namespace Link_Backend_EF.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var illness = _mapper.Map<SaveIllnessResource, Illness>(resource);
-            var result = await _service.SaveAsync(illness);
+            var model = _mapper.Map<SaveIllnessResource, Illness>(resource);
+            var result = await _service.SaveAsync(model);
 
             if (!result.Success)
                 return BadRequest(result.Message);
@@ -50,8 +50,8 @@ namespace Link_Backend_EF.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var illness = _mapper.Map<SaveIllnessResource, Illness>(resource);
-            var result = await _service.UpdateAsync(id, illness);
+            var model = _mapper.Map<SaveIllnessResource, Illness>(resource);
+            var result = await _service.UpdateAsync(id, model);
 
             if (!result.Success)
                 return BadRequest(result.Message);

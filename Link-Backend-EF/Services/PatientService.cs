@@ -16,7 +16,7 @@ namespace Link_Backend_EF.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<PatientResponse> Delete(int id)
+        public async Task<PatientResponse> DeleteAsync(int id)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)
@@ -85,7 +85,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public async Task<PatientResponse> Update(int id, Patient model)
+        public async Task<PatientResponse> UpdateAsync(int id, Patient model)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)

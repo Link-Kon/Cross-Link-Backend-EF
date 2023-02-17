@@ -5,7 +5,7 @@
         public int Id { get; set; }
         public bool Active { get; set; }
         public string Email { get; set; }
-        public string Names { get; set; }
+        public string Name { get; set; }
         public string Lastname { get; set; }
         public string UserPhoto { get; set; }
         public int UserId { get; set; }

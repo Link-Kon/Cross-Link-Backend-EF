@@ -5,6 +5,6 @@
         Task<R> SaveAsync(T model);
         Task<R> FindByIdAsync(int id);
         Task<R> FindByPatiendIdAsync(int id);
-        Task<R> Update(int id, T model);
+        Task<R> UpdateAsync(int id, T model);
     }
 }

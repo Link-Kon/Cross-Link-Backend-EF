@@ -17,7 +17,7 @@ namespace Link_Backend_EF.Services
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
         }
-        public async Task<UserResponse> Delete(int id)
+        public async Task<UserResponse> DeleteAsync(int id)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)
@@ -69,9 +69,9 @@ namespace Link_Backend_EF.Services
 
         public async Task<UserResponse> SaveAsync(User model)
         {
-            var existingIllnessName = await _userRepository.FindByCodeAsync(model.Code);
-            if (existingIllnessName != null)
-                return new UserResponse("There is already an illness with this name");
+            var existingVal = await _userRepository.FindByCodeAsync(model.Code);
+            if (existingVal != null)
+                return new UserResponse("There is already a user with this code");
 
             try
             {
@@ -86,7 +86,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public async Task<UserResponse> Update(int id, User model)
+        public async Task<UserResponse> UpdateAsync(int id, User model)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)

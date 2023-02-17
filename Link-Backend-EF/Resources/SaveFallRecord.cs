@@ -2,7 +2,7 @@
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveHeartIssuesRecordResource
+    public class SaveFallRecordResource
     {
         [Required]
         public DateTime LectureDate { get; set; }

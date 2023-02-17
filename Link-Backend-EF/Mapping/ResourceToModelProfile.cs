@@ -8,7 +8,14 @@ namespace Link_Backend_EF.Mapping
     {
         public ResourceToModelProfile()
         {
+            CreateMap<SaveFallRecordResource, FallRecord>();
+            CreateMap<SaveFriendshipResource, Friendship>();
+            CreateMap<SaveHeartIssuesRecordResource, HeartIssuesRecord>();
+            CreateMap<SaveHeartRhythmRecordResource, HeartRhythmRecord>();
             CreateMap<SaveIllnessResource, Illness>();
+            CreateMap<SavePatientResource, Patient>();
+            CreateMap<SaveUserResource, User>();
+            CreateMap<SaveUserDataResource, UserData>();
         }
     }
 }

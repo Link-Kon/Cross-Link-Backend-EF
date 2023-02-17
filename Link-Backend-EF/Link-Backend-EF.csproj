@@ -32,6 +32,7 @@
     <Compile Remove="Resources\SaveIllnessResource - Copy %285%29.cs" />
     <Compile Remove="Resources\SaveIllnessResource - Copy %286%29.cs" />
     <Compile Remove="Resources\SaveIllnessResource - Copy.cs" />
+    <Compile Remove="Resources\SavePatientResource - Copy.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -61,7 +61,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public async Task<HeartIssuesRecordResponse> Update(int id, HeartIssuesRecord model)
+        public async Task<HeartIssuesRecordResponse> UpdateAsync(int id, HeartIssuesRecord model)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)

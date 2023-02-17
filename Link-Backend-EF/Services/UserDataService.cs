@@ -16,7 +16,7 @@ namespace Link_Backend_EF.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<UserDataResponse> Delete(int id)
+        public async Task<UserDataResponse> DeleteAsync(int id)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)
@@ -85,7 +85,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public async Task<UserDataResponse> Update(int id, UserData model)
+        public async Task<UserDataResponse> UpdateAsync(int id, UserData model)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)
@@ -97,7 +97,7 @@ namespace Link_Backend_EF.Services
 
             result.Active = model.Active;
             result.Email = model.Email;
-            result.Names = model.Names;
+            result.Name = model.Name;
             result.Lastname = model.Lastname;
             result.UserPhoto = model.UserPhoto;
             

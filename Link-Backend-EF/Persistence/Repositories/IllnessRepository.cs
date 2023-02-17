@@ -11,14 +11,14 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
         }
 
-        public async Task AddAsync(Illness illness)
+        public async Task AddAsync(Illness model)
         {
-            await _context.Illness.AddAsync(illness);
+            await _context.Illness.AddAsync(model);
         }
 
-        public void Delete(Illness illness)
+        public void Delete(Illness model)
         {
-            _context.Illness.Remove(illness);
+            _context.Illness.Remove(model);
         }
 
         public async Task<Illness> FindByIdAsync(int id)
@@ -36,9 +36,9 @@ namespace Link_Backend_EF.Persistence.Repositories
             return await _context.Illness.ToListAsync();
         }
 
-        public void Update(Illness illness)
+        public void Update(Illness model)
         {
-            _context.Illness.Update(illness);
+            _context.Illness.Update(model);
         }
     }
 }

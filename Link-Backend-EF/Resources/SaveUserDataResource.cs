@@ -9,7 +9,7 @@ namespace Link_Backend_EF.Resources
         [Required]
         public string Email { get; set; }
         [Required]
-        public string Names { get; set; }
+        public string Name { get; set; }
         public string Lastname { get; set; }
         public string UserPhoto { get; set; }
         [Required]

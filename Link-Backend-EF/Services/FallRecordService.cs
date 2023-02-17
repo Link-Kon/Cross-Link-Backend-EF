@@ -62,7 +62,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public async Task<FallRecordResponse> Update(int id, FallRecord model)
+        public async Task<FallRecordResponse> UpdateAsync(int id, FallRecord model)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)

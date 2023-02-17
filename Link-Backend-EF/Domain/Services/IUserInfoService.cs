@@ -5,7 +5,7 @@
         Task<R> SaveAsync(T model);
         Task<R> FindByIdAsync(int id);
         Task<R> FindByStringAsync(string value);
-        Task<R> Update(int id, T model);
-        Task<R> Delete(int id);
+        Task<R> UpdateAsync(int id, T model);
+        Task<R> DeleteAsync(int id);
     }
 }

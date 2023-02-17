@@ -15,61 +15,69 @@ namespace Link_Backend_EF.Controllers
         private readonly IUserInfoService<User, UserResponse> _service;
         private readonly IMapper _mapper;
 
-        /*public UserDataController(IUserInfoService iUserInfoService, IMapper mapper)
+        public UserController(IUserInfoService<User, UserResponse> service, IMapper mapper)
         {
-            _illnessService = illnessService;
+            _service = service;
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<IllnessResource>> GetAllAsync()
+        [HttpGet("{id}")]
+        public async Task<UserResource> GetByIdAsync(int id)
         {
-            var illnesses = await _illnessService.ListAsync();
-            var resources = _mapper.Map<IEnumerable<Illness>, IEnumerable<IllnessResource>>(illnesses);
+            var model = await _service.FindByIdAsync(id);
+            var resource = _mapper.Map<User, UserResource>(model.Resource);
+            return resource;
+        }
+
+        [HttpGet("GetByUsername/{username}")]
+        public async Task<UserResource> GetByUsernameAsync(string username)
+        {
+            var model = await _service.FindByStringAsync(username);
+            var resources = _mapper.Map<User, UserResource>(model.Resource);
             return resources;
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] SaveIllnessResource resource)
+        public async Task<IActionResult> PostAsync([FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var illness = _mapper.Map<SaveIllnessResource, Illness>(resource);
-            var result = await _illnessService.SaveAsync(illness);
+            var model = _mapper.Map<SaveUserResource, User>(resource);
+            var result = await _service.SaveAsync(model);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<Illness, IllnessResource>(result.Resource);
+            var itemResource = _mapper.Map<User, UserResource>(result.Resource);
             return Ok(itemResource);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveIllnessResource resource)
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var illness = _mapper.Map<SaveIllnessResource, Illness>(resource);
-            var result = await _illnessService.UpdateAsync(id, illness);
+            var model = _mapper.Map<SaveUserResource, User>(resource);
+            var result = await _service.UpdateAsync(id, model);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<Illness, IllnessResource>(result.Resource);
+            var itemResource = _mapper.Map<User, UserResource>(result.Resource);
             return Ok(itemResource);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
         {
-            var result = await _illnessService.DeleteAsync(id);
+            var result = await _service.DeleteAsync(id);
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<Illness, IllnessResource>(result.Resource);
+            var itemResource = _mapper.Map<User, UserResource>(result.Resource);
             return Ok(itemResource);
-        }*/
+        }
     }
 }

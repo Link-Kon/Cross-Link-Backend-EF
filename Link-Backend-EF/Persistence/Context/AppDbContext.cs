@@ -1,6 +1,8 @@
 ﻿using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Extensions;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Link_Backend_EF.Persistence.Context
 {
@@ -8,6 +10,7 @@ namespace Link_Backend_EF.Persistence.Context
     {
         public DbSet<Illness> Illness { get; set; }
         public DbSet<FallRecord> FallRecord { get; set; }
+        [NotMapped]
         public DbSet<Friendship> Friendship { get; set; }
         public DbSet<HeartIssuesRecord> HeartIssuesRecord { get; set; }
         public DbSet<HeartRhythmRecord> HeartRhythmRecord { get; set; }
@@ -36,7 +39,7 @@ namespace Link_Backend_EF.Persistence.Context
                 .HasForeignKey(f => f.UserDataId);
 
             //Friendship
-            builder.Entity<Friendship>().ToTable("Friendship");
+            /*builder.Entity<Friendship>().ToTable("Friendship");
             builder.Entity<Friendship>().HasKey(p => p.Id);
             builder.Entity<Friendship>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Friendship>().Property(p => p.Active).IsRequired();
@@ -49,7 +52,7 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<Friendship>()
                 .HasOne(f => f.User2)
                 .WithMany(u => u.Friendships)
-                .HasForeignKey(f => f.CaretakerId);
+                .HasForeignKey(f => f.CaretakerId);*/
 
             //HeartIssuesRecord
             builder.Entity<HeartIssuesRecord>().ToTable("HeartIssuesRecords");
@@ -64,7 +67,7 @@ namespace Link_Backend_EF.Persistence.Context
                 .HasForeignKey(h => h.UserDataId);
 
             //HeartRhythmRecord
-            builder.Entity<HeartRhythmRecord>().ToTable("HeartIssuesRecords");
+            builder.Entity<HeartRhythmRecord>().ToTable("HeartRhythmRecords");
             builder.Entity<HeartRhythmRecord>().HasKey(p => p.Id);
             builder.Entity<HeartRhythmRecord>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<HeartRhythmRecord>().Property(p => p.LectureDate).IsRequired();
@@ -112,7 +115,7 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<UserData>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<UserData>().Property(p => p.Active).IsRequired();
             builder.Entity<UserData>().Property(p => p.Email).IsRequired();
-            builder.Entity<UserData>().Property(p => p.Names).IsRequired();
+            builder.Entity<UserData>().Property(p => p.Name).IsRequired();
             builder.Entity<UserData>().Property(p => p.Lastname).IsRequired();
             builder.Entity<UserData>().Property(p => p.UserId).IsRequired();
 

@@ -8,6 +8,6 @@
         public string Password { get; set; }
 
         public UserData UserData { get; set; }
-        public List<Friendship> Friendships { get; set; }
+        //public List<Friendship> Friendships { get; set; }
     }
 }
