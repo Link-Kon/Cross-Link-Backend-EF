@@ -9,6 +9,6 @@ namespace Link_Backend_EF.Resources
         [Required]
         public string Severity { get; set; }
         [Required]
-        public int UserDataId { get; set; }
+        public int PatientId { get; set; }
     }
 }

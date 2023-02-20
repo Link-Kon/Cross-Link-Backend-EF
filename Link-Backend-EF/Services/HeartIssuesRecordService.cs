@@ -8,11 +8,14 @@ namespace Link_Backend_EF.Services
     public class HeartIssuesRecordService : IHealthRecordService<HeartIssuesRecord, HeartIssuesRecordResponse>
     {
         private readonly IHealthRecordRepository<HeartIssuesRecord> _repository;
+        //private readonly IPatientRepository _patientRepository;
+        private readonly IUserInfoRepository<Patient> _patientRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HeartIssuesRecordService(IHealthRecordRepository<HeartIssuesRecord> repository, IUnitOfWork unitOfWork)
+        public HeartIssuesRecordService(IHealthRecordRepository<HeartIssuesRecord> repository, IUserInfoRepository<Patient> patientRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _patientRepository = patientRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -48,6 +51,13 @@ namespace Link_Backend_EF.Services
 
         public async Task<HeartIssuesRecordResponse> SaveAsync(HeartIssuesRecord model)
         {
+            var result = await _patientRepository.FindByIdAsync(model.PatientId);
+            if (result == null)
+                return new HeartIssuesRecordResponse("The patient do not exit");
+
+            if (result.Active == false)
+                return new HeartIssuesRecordResponse("The patient must be active");
+
             try
             {
                 await _repository.AddAsync(model);

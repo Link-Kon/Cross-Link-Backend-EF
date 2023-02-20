@@ -32,39 +32,38 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<FallRecord>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<FallRecord>().Property(p => p.LectureDate).IsRequired();
             builder.Entity<FallRecord>().Property(p => p.Severity).IsRequired();
-            builder.Entity<FallRecord>().Property(p => p.UserDataId).IsRequired();
+            builder.Entity<FallRecord>().Property(p => p.PatientId).IsRequired();
             builder.Entity<FallRecord>()
-                .HasOne(f => f.UserData)
+                .HasOne(f => f.Patient)
                 .WithMany(ud => ud.FallRecords)
-                .HasForeignKey(f => f.UserDataId);
+                .HasForeignKey(f => f.PatientId);
 
             //Friendship
-            /*builder.Entity<Friendship>().ToTable("Friendship");
-            builder.Entity<Friendship>().HasKey(p => p.Id);
-            builder.Entity<Friendship>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Friendship>().ToTable("Friendship");
+            builder.Entity<Friendship>().HasKey(p => new { p.User1Code, p.User2Code });
             builder.Entity<Friendship>().Property(p => p.Active).IsRequired();
-            builder.Entity<Friendship>().Property(p => p.PatientId).IsRequired();
-            builder.Entity<Friendship>().Property(p => p.CaretakerId).IsRequired();
+            builder.Entity<Friendship>().Property(p => p.User1Code).IsRequired();
+            builder.Entity<Friendship>().Property(p => p.User2Code).IsRequired();
             builder.Entity<Friendship>()
                 .HasOne(f => f.User1)
-                .WithMany(u => u.Friendships)
-                .HasForeignKey(f => f.PatientId);
+                .WithMany()
+                .HasForeignKey(f => f.User1Code);
             builder.Entity<Friendship>()
                 .HasOne(f => f.User2)
                 .WithMany(u => u.Friendships)
-                .HasForeignKey(f => f.CaretakerId);*/
+                .HasForeignKey(f => f.User2Code);
 
             //HeartIssuesRecord
-            builder.Entity<HeartIssuesRecord>().ToTable("HeartIssuesRecords");
+            builder.Entity<HeartIssuesRecord>().ToTable("HeartIssueRecords");
             builder.Entity<HeartIssuesRecord>().HasKey(p => p.Id);
             builder.Entity<HeartIssuesRecord>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<HeartIssuesRecord>().Property(p => p.LectureDate).IsRequired();
             builder.Entity<HeartIssuesRecord>().Property(p => p.Severity).IsRequired();
-            builder.Entity<HeartIssuesRecord>().Property(p => p.UserDataId).IsRequired();
+            builder.Entity<HeartIssuesRecord>().Property(p => p.PatientId).IsRequired();
             builder.Entity<HeartIssuesRecord>()
-                .HasOne(h => h.UserData)
+                .HasOne(h => h.Patient)
                 .WithMany(u => u.HeartIssuesRecords)
-                .HasForeignKey(h => h.UserDataId);
+                .HasForeignKey(h => h.PatientId);
 
             //HeartRhythmRecord
             builder.Entity<HeartRhythmRecord>().ToTable("HeartRhythmRecords");
@@ -72,11 +71,11 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<HeartRhythmRecord>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<HeartRhythmRecord>().Property(p => p.LectureDate).IsRequired();
             builder.Entity<HeartRhythmRecord>().Property(p => p.Bpm).IsRequired();
-            builder.Entity<HeartRhythmRecord>().Property(p => p.UserDataId).IsRequired();
+            builder.Entity<HeartRhythmRecord>().Property(p => p.PatientId).IsRequired();
             builder.Entity<HeartRhythmRecord>()
-                .HasOne(h => h.UserData)
+                .HasOne(h => h.Patient)
                 .WithMany(u => u.HeartRhythmRecords)
-                .HasForeignKey(h => h.UserDataId);
+                .HasForeignKey(h => h.PatientId);
 
             // Illness
             builder.Entity<Illness>().ToTable("Illnesses");
@@ -104,6 +103,7 @@ namespace Link_Backend_EF.Persistence.Context
             //User
             builder.Entity<User>().ToTable("Users");
             builder.Entity<User>().HasKey(p => p.Id);
+            builder.Entity<User>().HasKey(p => p.Code);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<User>().Property(p => p.Code).IsRequired();
             builder.Entity<User>().Property(p => p.Username).IsRequired();

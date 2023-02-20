@@ -23,7 +23,7 @@ namespace Link_Backend_EF.Persistence.Repositories
 
         public async Task<HeartIssuesRecord> FindByPatiendIdAsync(int id)
         {
-            return await _context.HeartIssuesRecord.FirstOrDefaultAsync(i => i.UserDataId == id);
+            return await _context.HeartIssuesRecord.FirstOrDefaultAsync(i => i.PatientId == id);
         }
 
         public void Update(HeartIssuesRecord model)

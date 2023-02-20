@@ -7,8 +7,8 @@ namespace Link_Backend_EF.Resources
         [Required]
         public bool Active { get; set; }
         [Required]
-        public int PatientId { get; set; }
+        public string User1Code { get; set; }
         [Required]
-        public int CaretakerId { get; set; }
+        public string User2Code { get; set; }
     }
 }

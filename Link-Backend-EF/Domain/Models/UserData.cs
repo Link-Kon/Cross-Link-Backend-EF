@@ -13,8 +13,6 @@
         public User User { get; set; }
         public Patient Patient { get; set; }
         public List<Illness> Illnesses { get; set; }
-        public List<FallRecord> FallRecords { get; set; }
-        public List<HeartIssuesRecord> HeartIssuesRecords { get; set; }
-        public List<HeartRhythmRecord> HeartRhythmRecords { get; set; }
+        
     }
 }

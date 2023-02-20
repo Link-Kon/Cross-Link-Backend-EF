@@ -4,9 +4,9 @@
     {
         public int Id { get; set; }
         public DateTime LectureDate { get; set; }
-        public string Bpm { get; set; }
-        public int UserDataId { get; set; }
+        public int Bpm { get; set; }
+        public int PatientId { get; set; }
 
-        public UserData UserData { get; set; }
+        public Patient Patient { get; set; }
     }
 }

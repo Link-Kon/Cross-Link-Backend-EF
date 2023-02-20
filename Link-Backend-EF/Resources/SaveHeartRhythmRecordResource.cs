@@ -7,8 +7,8 @@ namespace Link_Backend_EF.Resources
         [Required]
         public DateTime LectureDate { get; set; }
         [Required]
-        public string Bpm { get; set; }
+        public int Bpm { get; set; }
         [Required]
-        public int UserDataId { get; set; }
+        public int PatientId { get; set; }
     }
 }

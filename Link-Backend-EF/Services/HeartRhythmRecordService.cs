@@ -8,11 +8,13 @@ namespace Link_Backend_EF.Services
     public class HeartRhythmRecordService : IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse>
     {
         private readonly IHealthRecordRepository<HeartRhythmRecord> _repository;
+        private readonly IUserInfoRepository<Patient> _patientRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public HeartRhythmRecordService(IHealthRecordRepository<HeartRhythmRecord> repository, IUnitOfWork unitOfWork)
+        public HeartRhythmRecordService(IHealthRecordRepository<HeartRhythmRecord> repository, IUserInfoRepository<Patient> patientRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _patientRepository = patientRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -48,6 +50,13 @@ namespace Link_Backend_EF.Services
 
         public async Task<HeartRhythmRecordResponse> SaveAsync(HeartRhythmRecord model)
         {
+            var result = await _patientRepository.FindByIdAsync(model.PatientId);
+            if (result == null)
+                return new HeartRhythmRecordResponse("The patient do not exit");
+
+            if (result.Active == false)
+                return new HeartRhythmRecordResponse("The patient must be active");
+
             try
             {
                 await _repository.AddAsync(model);

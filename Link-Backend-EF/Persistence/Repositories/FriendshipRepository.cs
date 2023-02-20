@@ -21,19 +21,14 @@ namespace Link_Backend_EF.Persistence.Repositories
             _context.Friendship.Remove(model);
         }
 
-        public async Task<Friendship> FindByCaretakerIdAsync(int id)
+        public async Task<IEnumerable<Friendship>> ListByUserCodeAsync(string code)
         {
-            return await _context.Friendship.FirstOrDefaultAsync(i => i.CaretakerId == id);
+            return await _context.Friendship.Where(i => i.User1Code == code || i.User2Code == code).ToListAsync();
         }
 
-        public async Task<Friendship> FindByIdAsync(int id)
+        public async Task<Friendship> FindByUsersCodeAsync(string user1code, string user2code)
         {
-            return await _context.Friendship.FindAsync(id);
-        }
-
-        public async Task<Friendship> FindByPatiendIdAsync(int id)
-        {
-            return await _context.Friendship.FirstOrDefaultAsync(i => i.PatientId == id);
+            return await _context.Friendship.FirstOrDefaultAsync(i => i.User1Code == user1code && i.User2Code == user2code);
         }
 
         public void Update(Friendship model)

@@ -18,7 +18,7 @@ namespace Link_Backend_EF.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<FriendshipResponse> Delete(int id)
+        /*public async Task<FriendshipResponse> Delete(int id)
         {
             var result = await _repository.FindByIdAsync(id);
             if (result == null)
@@ -35,47 +35,25 @@ namespace Link_Backend_EF.Services
             {
                 return new FriendshipResponse($"An error occurred while deleting the Friendship: {e.Message}");
             }
-        }
+        }*/
 
-        public async Task<FriendshipResponse> FindByCaretakerAsync(int id)
+        public async Task<IEnumerable<Friendship>> ListByUserCodeAsync(string code)
         {
-            try
-            {
-                var result = await _repository.FindByCaretakerIdAsync(id);
-                await _unitOfWork.CompleteAsync();
-
-                return new FriendshipResponse(result);
-            }
-            catch (Exception e)
-            {
-                return new FriendshipResponse($"Friendship not found: {e.Message}");
-            }
-        }
-
-        public async Task<FriendshipResponse> FindByPatiendIdAsync(int id)
-        {
-            try
-            {
-                var result = await _repository.FindByPatiendIdAsync(id);
-                await _unitOfWork.CompleteAsync();
-
-                return new FriendshipResponse(result);
-            }
-            catch (Exception e)
-            {
-                return new FriendshipResponse($"Friendship not found: {e.Message}");
-            }
+            return await _repository.ListByUserCodeAsync(code);
         }
 
         public async Task<FriendshipResponse> SaveAsync(Friendship model)
         {
-            var existingCaretakerCode = await _userRepository.FindByCodeAsync(model.CaretakerId.ToString());
+            var existingCaretakerCode = await _userRepository.FindByCodeAsync(model.User1Code.ToString());
             if (existingCaretakerCode != null)
-                return new FriendshipResponse("Caretaker not found");
+                return new FriendshipResponse("User1Code not found");
 
-            var existingPatientCode = await _userRepository.FindByCodeAsync(model.PatientId.ToString());
+            var existingPatientCode = await _userRepository.FindByCodeAsync(model.User2Code.ToString());
             if (existingPatientCode != null)
-                return new FriendshipResponse("Patient not found");
+                return new FriendshipResponse("User2Code not found");
+
+            if (model.User1Code == model.User2Code)
+                return new FriendshipResponse("Both users must no be the same");
 
             try
             {
@@ -90,19 +68,11 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        public async Task<FriendshipResponse> Update(int id, Friendship model)
+        public async Task<FriendshipResponse> UpdateAsync(Friendship model)
         {
-            var result = await _repository.FindByIdAsync(id);
+            var result = await _repository.FindByUsersCodeAsync(model.User1Code, model.User2Code);
             if (result == null)
                 return new FriendshipResponse("Friendship not found");
-
-            var existingCaretakerCode = await _userRepository.FindByCodeAsync(model.CaretakerId.ToString());
-            if (existingCaretakerCode != null)
-                return new FriendshipResponse("Caretaker not found");
-
-            var existingPatientCode = await _userRepository.FindByCodeAsync(model.PatientId.ToString());
-            if (existingPatientCode != null)
-                return new FriendshipResponse("Patient not found");
 
             result.Active = model.Active;
 

@@ -23,7 +23,7 @@ namespace Link_Backend_EF.Persistence.Repositories
 
         public async Task<FallRecord> FindByPatiendIdAsync(int id)
         {
-            return await _context.FallRecord.FirstOrDefaultAsync(i => i.UserDataId == id);
+            return await _context.FallRecord.FirstOrDefaultAsync(i => i.PatientId == id);
         }
 
         public void Update(FallRecord model)

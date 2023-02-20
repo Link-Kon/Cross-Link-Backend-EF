@@ -9,11 +9,13 @@ namespace Link_Backend_EF.Services
     public class FallRecordService : IHealthRecordService<FallRecord, FallRecordResponse>
     {
         private readonly IHealthRecordRepository<FallRecord> _repository;
+        private readonly IUserInfoRepository<Patient> _patientRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public FallRecordService(IHealthRecordRepository<FallRecord> repository, IUnitOfWork unitOfWork)
+        public FallRecordService(IHealthRecordRepository<FallRecord> repository, IUserInfoRepository<Patient> patientRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _patientRepository = patientRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -49,6 +51,13 @@ namespace Link_Backend_EF.Services
 
         public async Task<FallRecordResponse> SaveAsync(FallRecord model)
         {
+            var result = await _patientRepository.FindByIdAsync(model.PatientId);
+            if (result == null)
+                return new FallRecordResponse("The patient do not exit");
+
+            if (result.Active == false)
+                return new FallRecordResponse("The patient must be active");
+
             try
             {
                 await _repository.AddAsync(model);

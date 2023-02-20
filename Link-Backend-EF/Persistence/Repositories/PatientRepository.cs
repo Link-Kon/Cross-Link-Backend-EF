@@ -36,5 +36,6 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
             _context.Patient.Update(model);
         }
+
     }
 }
