@@ -15,6 +15,12 @@ namespace Link_Backend_EF.Controllers
         private readonly IUserInfoService<Patient, PatientResponse> _service;
         private readonly IMapper _mapper;
 
+        public PatientController(IUserInfoService<Patient, PatientResponse> service, IMapper mapper)
+        {
+            _service = service;
+            _mapper = mapper;
+        }
+
         [HttpGet("{id}")]
         public async Task<PatientResource> GetByIdAsync(int id)
         {

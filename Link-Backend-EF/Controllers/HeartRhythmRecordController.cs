@@ -15,6 +15,12 @@ namespace Link_Backend_EF.Controllers
         private readonly IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse> _service;
         private readonly IMapper _mapper;
 
+        public HeartRhythmRecordController(IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse> service, IMapper mapper)
+        {
+            _service = service;
+            _mapper = mapper;
+        }
+
         [HttpGet("{id}")]
         public async Task<HeartRhythmRecordResource> GetByIdAsync(int id)
         {
