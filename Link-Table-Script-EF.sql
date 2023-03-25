@@ -9,15 +9,17 @@ CREATE TABLE illnesses(
 );
 
 DROP TABLE illnesses
-SELECT * FROM illnesses
 
 CREATE TABLE users(
 	id int IDENTITY,
-	code nvarchar(40),
+	code nvarchar(8) UNIQUE NOT NULL,
 	username nvarchar(40),
 	password nvarchar(max)
-	PRIMARY KEY (id),
+	PRIMARY KEY (id)
 )
+
+ALTER TABLE users
+ALTER COLUMN code nvarchar(40) PERSISTED PRIMARY KEY;
 
 CREATE TABLE users_data
 (
@@ -40,7 +42,7 @@ CREATE TABLE patients
 	weight				decimal(5,2) NULL,
 	height				decimal(5,2) NULL,
 	country				varchar(56) NULL,
-	user_data_id			int NOT NULL,
+	user_data_id		int NOT NULL,
 	PRIMARY KEY (id),
     CONSTRAINT FK_user_data_id FOREIGN KEY (user_data_id)
     REFERENCES users_data(id)
@@ -90,15 +92,27 @@ CREATE TABLE illnesses_list
     REFERENCES illnesses(id)
 ) 
 
+DROP TABLE userms
+
+CREATE TABLE userms(
+	id int IDENTITY,
+	code		varchar(50) UNIQUE  NOT	NULL,
+	username	nvarchar(50),
+	password	nvarchar(max)
+	PRIMARY KEY (id)
+)
+
+
+DROP TABLE friendship
 CREATE TABLE friendship
 (
-	id						int IDENTITY,
+	user1_code				varchar(8) UNIQUE NOT	NULL,
+	user2_code				varchar(8) UNIQUE NOT NULL,
 	active					bit NOT NULL,
-	patient_id				int NOT	NULL,
-	caretaker_id			int NOT NULL,
-	PRIMARY KEY (id),
-    CONSTRAINT FK_patient_id FOREIGN KEY (patient_id)
-    REFERENCES users(id),
-	CONSTRAINT FK_caretaker_id FOREIGN KEY (caretaker_id)
-    REFERENCES users(id)
+	PRIMARY KEY (user1_code,user2_code),
+	CONSTRAINT FK_user_code_1 FOREIGN KEY (user1_code)
+    REFERENCES users(code),
+	CONSTRAINT FK_user_2_code FOREIGN KEY (user2_code)
+    REFERENCES users(code),
+	CONSTRAINT FriendsAreDistinct_CK    CHECK  (user1_code <> user2_code)
 ) 

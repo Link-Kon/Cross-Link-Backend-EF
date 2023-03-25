@@ -45,11 +45,11 @@ namespace Link_Backend_EF.Services
         public async Task<FriendshipResponse> SaveAsync(Friendship model)
         {
             var existingCaretakerCode = await _userRepository.FindByCodeAsync(model.User1Code.ToString());
-            if (existingCaretakerCode != null)
+            if (existingCaretakerCode == null)
                 return new FriendshipResponse("User1Code not found");
 
             var existingPatientCode = await _userRepository.FindByCodeAsync(model.User2Code.ToString());
-            if (existingPatientCode != null)
+            if (existingPatientCode == null)
                 return new FriendshipResponse("User2Code not found");
 
             if (model.User1Code == model.User2Code)

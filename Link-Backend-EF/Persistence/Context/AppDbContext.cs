@@ -124,7 +124,8 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<UserData>()
                 .HasOne(u => u.User)
                 .WithOne(ud => ud.UserData)
-                .HasForeignKey<UserData>(u => u.UserId);
+                .HasForeignKey<UserData>(u => u.UserId)
+                .HasForeignKey<UserData>(u => u.UserCode);
 
 
             builder.UseSnakeCaseNamingConvention();
