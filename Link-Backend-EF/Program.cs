@@ -27,6 +27,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserInfoRepository<UserData>, UserDataRepository>();
 builder.Services.AddScoped<IUserInfoRepository<Patient>, PatientRepository>();
 builder.Services.AddScoped<IIllnessRepository, IllnessRepository>();
+builder.Services.AddScoped<IUserDeviceRepository, UserDeviceRepository>();
 
 // Services init
 builder.Services.AddScoped<IFriendshipService, FriendshipService>();
@@ -37,6 +38,7 @@ builder.Services.AddScoped<IUserInfoService<User,UserResponse>, UserService>();
 builder.Services.AddScoped<IUserInfoService<UserData, UserDataResponse>, UserDataService>();
 builder.Services.AddScoped<IUserInfoService<Patient, PatientResponse>, PatientService>();
 builder.Services.AddScoped<IIllnessService, IllnessService>();
+builder.Services.AddScoped<IUserDeviceService, UserDeviceService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
@@ -53,7 +55,7 @@ builder.Services.AddSwaggerGen();
 // Token authentication view
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Test01", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Cross Link Rest API", Version = "v1" });
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
     {

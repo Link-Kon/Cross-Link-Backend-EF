@@ -9,11 +9,10 @@
         public string Lastname { get; set; }
         public string UserPhoto { get; set; }
         public int UserId { get; set; }
-        public string UserCode { get; set; }
 
         public User User { get; set; }
         public Patient Patient { get; set; }
         public List<Illness> Illnesses { get; set; }
-        
+        public UserDevice UserDevice { get; set; }
     }
 }

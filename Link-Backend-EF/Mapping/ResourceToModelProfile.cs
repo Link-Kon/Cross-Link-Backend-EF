@@ -16,6 +16,7 @@ namespace Link_Backend_EF.Mapping
             CreateMap<SavePatientResource, Patient>();
             CreateMap<SaveUserResource, User>();
             CreateMap<SaveUserDataResource, UserData>();
+            CreateMap<SaveUserDeviceResource, UserDevice>();
         }
     }
 }
