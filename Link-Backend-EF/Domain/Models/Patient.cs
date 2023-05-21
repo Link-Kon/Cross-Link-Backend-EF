@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
         public bool Active { get; set; }
-        public float Weight { get; set; }
-        public float Height { get; set; }
+        public decimal Weight { get; set; }
+        public decimal Height { get; set; }
         public string Country { get; set; }
         public int UserDataId { get; set; }
 

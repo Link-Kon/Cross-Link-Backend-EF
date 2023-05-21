@@ -25,7 +25,7 @@ CREATE TABLE users (
 
 CREATE TABLE users_data (
 	id int IDENTITY,
-	activo bit NOT NULL,
+	active bit NOT NULL,
 	email varchar(80) NOT NULL,
 	name varchar(80) NOT NULL,
 	lastname varchar(80) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE users_devices(
 CREATE TABLE patients
 (
 	id					int IDENTITY,
-	active				varchar(80) NOT NULL,
+	active				bit NOT NULL,
 	weight				decimal(5,2) NULL,
 	height				decimal(5,2) NULL,
 	country				varchar(56) NULL,
@@ -74,9 +74,9 @@ CREATE TABLE patients
 CREATE TABLE heart_rhythm_records
 (
 	id					int IDENTITY,
-	lectureDate			datetime NOT NULL,
+	lectur_date			datetime NOT NULL,
 	bpm					int NOT	NULL,
-	patient_id		int NOT NULL,
+	patient_id			int NOT NULL,
 	PRIMARY KEY (id),
     CONSTRAINT FK_patient_user_1 FOREIGN KEY (patient_id)
     REFERENCES patients(id)
@@ -85,7 +85,7 @@ CREATE TABLE heart_rhythm_records
 CREATE TABLE heart_issue_records
 (
 	id					int IDENTITY,
-	fecha_lectura		datetime NOT NULL,
+	lectur_date		datetime NOT NULL,
 	severity			varchar(20) NOT	NULL,
 	patient_id		int NOT NULL,
 	PRIMARY KEY (id),
@@ -96,7 +96,7 @@ CREATE TABLE heart_issue_records
 CREATE TABLE fall_records
 (
 	id				int IDENTITY,
-	lectureDate		datetime NOT NULL,
+	lectur_date		datetime NOT NULL,
 	severity		varchar(20) NOT	NULL,
 	patient_id	int NOT NULL,
 	PRIMARY KEY (id),
