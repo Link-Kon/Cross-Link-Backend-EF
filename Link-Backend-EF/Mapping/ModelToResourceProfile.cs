@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Resources;
+using Link_Backend_EF.Resources.Base;
 
 namespace Link_Backend_EF.Mapping
 {
@@ -17,6 +18,10 @@ namespace Link_Backend_EF.Mapping
             CreateMap<User, UserResource>();
             CreateMap<UserData, UserDataResource>();
             CreateMap<UserDevice, UserDeviceResource>();
+
+            //Validation Resource
+            CreateMap<bool, ValidationResource>()
+                .ForMember(dest => dest.Success, opt => opt.MapFrom(src => src));
         }
     }
 }
