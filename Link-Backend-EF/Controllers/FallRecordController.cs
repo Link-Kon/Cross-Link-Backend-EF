@@ -4,6 +4,7 @@ using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Extensions;
 using Link_Backend_EF.Resources;
+using Link_Backend_EF.Resources.Base;
 using Link_Backend_EF.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,7 +51,7 @@ namespace Link_Backend_EF.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<FallRecord, FallRecordResource>(result.Resource);
+            var itemResource = _mapper.Map<BaseResponse<FallRecord>, ValidationResource>(result);
             return Ok(itemResource);
         }
 
@@ -66,7 +67,7 @@ namespace Link_Backend_EF.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<FallRecord, FallRecordResource>(result.Resource);
+            var itemResource = _mapper.Map<BaseResponse<FallRecord>, ValidationResource>(result);
             return Ok(itemResource);
         }
     }

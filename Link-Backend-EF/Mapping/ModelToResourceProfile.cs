@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Link_Backend_EF.Domain.Models;
+using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Resources.Base;
+using Microsoft.OpenApi.Any;
 
 namespace Link_Backend_EF.Mapping
 {
@@ -20,8 +22,7 @@ namespace Link_Backend_EF.Mapping
             CreateMap<UserDevice, UserDeviceResource>();
 
             //Validation Resource
-            CreateMap<bool, ValidationResource>()
-                .ForMember(dest => dest.Success, opt => opt.MapFrom(src => src));
+            CreateMap(typeof(BaseResponse<>), typeof(ValidationResource));
         }
     }
 }

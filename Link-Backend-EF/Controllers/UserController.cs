@@ -50,7 +50,7 @@ namespace Link_Backend_EF.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<bool, ValidationResource>(result.Success);
+            var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
 
             return Ok(itemResource);
         }
@@ -67,7 +67,7 @@ namespace Link_Backend_EF.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<User, UserResource>(result.Resource);
+            var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
             return Ok(itemResource);
         }
 
@@ -78,7 +78,7 @@ namespace Link_Backend_EF.Controllers
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            var itemResource = _mapper.Map<User, UserResource>(result.Resource);
+            var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
             return Ok(itemResource);
         }
     }
