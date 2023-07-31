@@ -1,6 +1,8 @@
-﻿namespace Link_Backend_EF.Domain.Models
+﻿using Link_Backend_EF.Domain.Models.Base;
+
+namespace Link_Backend_EF.Domain.Models
 {
-    public class Patient
+    public class Patient : DateAuditory
     {
         public int Id { get; set; }
         public bool Active { get; set; }
@@ -13,5 +15,9 @@
         public List<FallRecord> FallRecords { get; set; }
         public List<HeartIssuesRecord> HeartIssuesRecords { get; set; }
         public List<HeartRhythmRecord> HeartRhythmRecords { get; set; }
+
+        public Patient(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

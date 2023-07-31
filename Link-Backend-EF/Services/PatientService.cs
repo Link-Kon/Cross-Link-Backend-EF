@@ -74,6 +74,9 @@ namespace Link_Backend_EF.Services
 
             try
             {
+                model.CreationDate = DateTime.UtcNow;
+                model.LastUpdateDate = null;
+
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -95,6 +98,8 @@ namespace Link_Backend_EF.Services
             result.Height = model.Height;
             result.Weight = model.Weight;
             result.Country = model.Country;
+
+            result.LastUpdateDate = DateTime.UtcNow;
 
             try
             {

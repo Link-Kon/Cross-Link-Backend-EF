@@ -1,6 +1,8 @@
-﻿namespace Link_Backend_EF.Domain.Models
+﻿using Link_Backend_EF.Domain.Models.Base;
+
+namespace Link_Backend_EF.Domain.Models
 {
-    public class UserDevice
+    public class UserDevice : DateAuditory
     {
         public int Id { get; set; }
         public int UserDataId { get; set; }
@@ -9,5 +11,9 @@
 
         public UserData UserData { get; set; }
         public Device Device { get; set; }
+
+        public UserDevice(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

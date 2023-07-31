@@ -74,6 +74,9 @@ namespace Link_Backend_EF.Services
 
             try
             {
+                model.CreationDate = DateTime.UtcNow;
+                model.LastUpdateDate = null;
+
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -100,7 +103,9 @@ namespace Link_Backend_EF.Services
             result.Name = model.Name;
             result.Lastname = model.Lastname;
             result.UserPhoto = model.UserPhoto;
-            
+;
+            result.LastUpdateDate = DateTime.UtcNow;
+
             try
             {
                 _repository.Update(result);

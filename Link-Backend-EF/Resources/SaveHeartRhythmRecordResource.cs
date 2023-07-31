@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Link_Backend_EF.Domain.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveHeartRhythmRecordResource
+    public class SaveHeartRhythmRecordResource : DateAuditory
     {
         [Required]
         public DateTime LectureDate { get; set; }
@@ -10,5 +11,9 @@ namespace Link_Backend_EF.Resources
         public int Bpm { get; set; }
         [Required]
         public int PatientId { get; set; }
+
+        public SaveHeartRhythmRecordResource(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

@@ -63,6 +63,9 @@ namespace Link_Backend_EF.Services
 
             try
             {
+                illness.CreationDate = DateTime.UtcNow;
+                illness.LastUpdateDate = null;
+
                 await _repository.AddAsync(illness);
                 await _unitOfWork.CompleteAsync();
 
@@ -87,6 +90,8 @@ namespace Link_Backend_EF.Services
             result.Name = illness.Name;
             result.Description = illness.Description;
             result.CreatorId = illness.CreatorId;
+
+            result.LastUpdateDate = DateTime.UtcNow;
 
             try
             {

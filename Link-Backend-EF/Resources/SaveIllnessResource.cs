@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Link_Backend_EF.Domain.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveIllnessResource
+    public class SaveIllnessResource : DateAuditory
     {
         [Required]
         public string Name { get; set; }
@@ -11,5 +12,9 @@ namespace Link_Backend_EF.Resources
         public string Description { get; set; }
 
         public int? CreatorId { get; set; }
+
+        public SaveIllnessResource(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Link_Backend_EF.Domain.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveUserDataResource
+    public class SaveUserDataResource : DateAuditory
     {
         [Required]
         public bool Active { get; set; }
@@ -14,5 +15,9 @@ namespace Link_Backend_EF.Resources
         public string UserPhoto { get; set; }
         [Required]
         public int UserId { get; set; }
+
+        public SaveUserDataResource(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

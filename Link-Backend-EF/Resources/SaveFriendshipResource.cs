@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Link_Backend_EF.Domain.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveFriendshipResource
+    public class SaveFriendshipResource : DateAuditory
     {
         [Required]
         public bool Active { get; set; }
@@ -10,5 +11,9 @@ namespace Link_Backend_EF.Resources
         public string User1Code { get; set; }
         [Required]
         public string User2Code { get; set; }
+
+        public SaveFriendshipResource(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

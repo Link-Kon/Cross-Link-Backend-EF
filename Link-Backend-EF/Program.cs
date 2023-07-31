@@ -2,6 +2,7 @@ using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
+using Link_Backend_EF.Domain.Services.Communication.List;
 using Link_Backend_EF.Persistence.Context;
 using Link_Backend_EF.Persistence.Repositories;
 using Link_Backend_EF.Resources;
@@ -27,7 +28,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserInfoRepository<UserData>, UserDataRepository>();
 builder.Services.AddScoped<IUserInfoRepository<Patient>, PatientRepository>();
 builder.Services.AddScoped<IIllnessRepository, IllnessRepository>();
-builder.Services.AddScoped<IUserDeviceRepository, UserDeviceRepository>();
+builder.Services.AddScoped<IListRelationRepository<UserDevice>, UserDeviceRepository>();
 
 // Services init
 builder.Services.AddScoped<IFriendshipService, FriendshipService>();
@@ -38,7 +39,7 @@ builder.Services.AddScoped<IUserInfoService<User,UserResponse>, UserService>();
 builder.Services.AddScoped<IUserInfoService<UserData, UserDataResponse>, UserDataService>();
 builder.Services.AddScoped<IUserInfoService<Patient, PatientResponse>, PatientService>();
 builder.Services.AddScoped<IIllnessService, IllnessService>();
-builder.Services.AddScoped<IUserDeviceService, UserDeviceService>();
+builder.Services.AddScoped<IListRelationService<UserDevice, UserDeviceResponse, UserDeviceListResponse>, UserDeviceService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

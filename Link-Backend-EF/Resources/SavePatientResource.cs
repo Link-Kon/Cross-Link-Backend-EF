@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Link_Backend_EF.Domain.Models.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SavePatientResource
+    public class SavePatientResource : DateAuditory
     {
         [Required]
         public bool Active { get; set; }
@@ -14,5 +15,9 @@ namespace Link_Backend_EF.Resources
         public string Country { get; set; }
         [Required]
         public int UserDataId { get; set; }
+
+        public SavePatientResource(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

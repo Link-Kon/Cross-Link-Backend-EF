@@ -2,6 +2,7 @@
 using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
+using Link_Backend_EF.Domain.Services.Communication.List;
 using Link_Backend_EF.Extensions;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Resources.Base;
@@ -13,21 +14,21 @@ namespace Link_Backend_EF.Controllers
     [Route("/api/[controller]")]
     public class UserDeviceController : ControllerBase
     {
-        private readonly IUserDeviceService _service;
+        private readonly IListRelationService<UserDevice, UserDeviceResponse, UserDeviceListResponse> _service;
         private readonly IMapper _mapper;
 
-        public UserDeviceController(IUserDeviceService service, IMapper mapper)
+        public UserDeviceController(IListRelationService<UserDevice, UserDeviceResponse, UserDeviceListResponse> service, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
         }
 
         [HttpGet("{id}")]
-        public async Task<IEnumerable<UserDeviceResource>> GetAllByUserCodeAsync(int id)
+        public async Task<IActionResult> GetAllByUserCodeAsync(int id)
         {
-            var models = await _service.ListByUserIdAsync(id);
-            var resources = _mapper.Map<IEnumerable<UserDevice>, IEnumerable<UserDeviceResource>>(models);
-            return resources;
+            var model = await _service.ListByUserIdAsync(id);
+            var resources = _mapper.Map<BaseResponse<List<UserDevice>>, UserDeviceResource>(model);
+            return Ok(resources);
         }
 
         [HttpPost]

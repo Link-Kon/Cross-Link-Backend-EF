@@ -1,12 +1,19 @@
-﻿namespace Link_Backend_EF.Domain.Models
+﻿using Link_Backend_EF.Domain.Models.Base;
+
+namespace Link_Backend_EF.Domain.Models
 {
-    public class HeartIssuesRecord
+    public class HeartIssuesRecord : DateAuditory
     {
+
         public int Id { get; set; }
         public DateTime LectureDate { get; set; }
         public string Severity { get; set; }
         public int PatientId { get; set; }
 
         public Patient Patient { get; set; }
+
+        public HeartIssuesRecord(DateTime creationDate) : base(creationDate)
+        {
+        }
     }
 }

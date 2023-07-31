@@ -75,6 +75,9 @@ namespace Link_Backend_EF.Services
 
             try
             {
+                model.CreationDate = DateTime.UtcNow;
+                model.LastUpdateDate = null;
+
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -96,9 +99,10 @@ namespace Link_Backend_EF.Services
             if (existingUserCode != null)
                 return new UserResponse("There is already an User with this code");
 
-            result.Code = model.Code;
             result.Username = model.Username;
             result.Password = model.Password;
+
+            result.LastUpdateDate = DateTime.UtcNow;
 
             try
             {

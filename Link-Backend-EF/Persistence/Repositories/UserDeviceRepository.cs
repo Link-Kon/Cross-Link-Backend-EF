@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Link_Backend_EF.Persistence.Repositories
 {
-    public class UserDeviceRepository : BaseRepository, IUserDeviceRepository
+    public class UserDeviceRepository : BaseRepository, IListRelationRepository<UserDevice>
     {
         public UserDeviceRepository(AppDbContext context) : base(context)
         {
@@ -20,12 +20,12 @@ namespace Link_Backend_EF.Persistence.Repositories
             _context.UserDevice.Remove(model);
         }
 
-        public async Task<UserDevice> FindByUsersIdAndDeviceIdAsync(int userId, int deviceId)
+        public async Task<UserDevice> FindByUsersIdAndEntityIdAsync(int userId, int deviceId)
         {
             return await _context.UserDevice.FirstOrDefaultAsync(i => i.UserDataId == userId && i.DeviceId == deviceId);
         }
 
-        public async Task<IEnumerable<UserDevice>> ListByUserIdAsync(int id)
+        public async Task<List<UserDevice>> ListByUserIdAsync(int id)
         {
             return await _context.UserDevice.Where(i => i.UserDataId == id).ToListAsync();
         }
