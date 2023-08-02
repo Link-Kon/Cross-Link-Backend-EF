@@ -28,6 +28,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserInfoRepository<UserData>, UserDataRepository>();
 builder.Services.AddScoped<IUserInfoRepository<Patient>, PatientRepository>();
 builder.Services.AddScoped<IIllnessRepository, IllnessRepository>();
+builder.Services.AddScoped<IListRelationRepository<IllnessesList>, IllnessesListRepository>();
 builder.Services.AddScoped<IListRelationRepository<UserDevice>, UserDeviceRepository>();
 
 // Services init
@@ -39,6 +40,7 @@ builder.Services.AddScoped<IUserInfoService<User,UserResponse>, UserService>();
 builder.Services.AddScoped<IUserInfoService<UserData, UserDataResponse>, UserDataService>();
 builder.Services.AddScoped<IUserInfoService<Patient, PatientResponse>, PatientService>();
 builder.Services.AddScoped<IIllnessService, IllnessService>();
+builder.Services.AddScoped<IListRelationService<IllnessesList, IllnessesListResponse, IllnessesListListResponse>, IllnessesListService>();
 builder.Services.AddScoped<IListRelationService<UserDevice, UserDeviceResponse, UserDeviceListResponse>, UserDeviceService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();

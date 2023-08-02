@@ -13,6 +13,7 @@ namespace Link_Backend_EF.Mapping
             CreateMap<SaveHeartIssuesRecordResource, HeartIssuesRecord>();
             CreateMap<SaveHeartRhythmRecordResource, HeartRhythmRecord>();
             CreateMap<SaveIllnessResource, Illness>();
+            CreateMap<SaveIllnessesListResource, IllnessesList>();
             CreateMap<SavePatientResource, Patient>();
             CreateMap<SaveUserResource, User>();
             CreateMap<SaveUserDataResource, UserData>();

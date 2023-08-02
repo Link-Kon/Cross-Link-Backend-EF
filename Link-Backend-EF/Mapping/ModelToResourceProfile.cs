@@ -16,6 +16,7 @@ namespace Link_Backend_EF.Mapping
             CreateMap<HeartIssuesRecord, HeartIssuesRecordResource>();
             CreateMap<HeartRhythmRecord, HeartRhythmRecordResource>();
             CreateMap<Illness, IllnessResource>();
+            CreateMap<IllnessesList, IllnessesListResource>();
             CreateMap<Patient, PatientResource>();
             CreateMap<User, UserResource>();
             CreateMap<UserData, UserDataResource>();
@@ -24,6 +25,7 @@ namespace Link_Backend_EF.Mapping
             //Validation Resource
             CreateMap(typeof(BaseResponse<>), typeof(ValidationResource));
             CreateMap(typeof(BaseResponse<List<UserDevice>>), typeof(UserDeviceResource));
+            CreateMap(typeof(BaseResponse<List<IllnessesList>>), typeof(IllnessesListResource));
 
         }
     }

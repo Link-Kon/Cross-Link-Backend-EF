@@ -15,11 +15,6 @@ namespace Link_Backend_EF.Persistence.Repositories
             await _context.UserDevice.AddAsync(model);
         }
 
-        public void Delete(UserDevice model)
-        {
-            _context.UserDevice.Remove(model);
-        }
-
         public async Task<UserDevice> FindByUsersIdAndEntityIdAsync(int userId, int deviceId)
         {
             return await _context.UserDevice.FirstOrDefaultAsync(i => i.UserDataId == userId && i.DeviceId == deviceId);

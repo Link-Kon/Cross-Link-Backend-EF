@@ -30,7 +30,7 @@ namespace Link_Backend_EF.Controllers
             return resource;
         }
 
-        [HttpGet("PatientId/{id}")]
+        [HttpGet("UserDataId/{id}")]
         public async Task<HeartRhythmRecordResource> GetByPatientIdAsync(int id)
         {
             var model = await _service.FindByPatiendIdAsync(id);

@@ -9,8 +9,7 @@ namespace Link_Backend_EF.Domain.Models
         public string Description { get; set; }
         public int? CreatorId { get; set; }
 
-        //public UserData? Creator { get; set; }
-        public List<UserData> UsersData { get; set; }
+        public IllnessesList IllnessesList { get; set; }
 
         public Illness(DateTime creationDate) : base(creationDate)
         {

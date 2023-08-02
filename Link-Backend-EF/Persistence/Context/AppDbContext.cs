@@ -9,6 +9,7 @@ namespace Link_Backend_EF.Persistence.Context
     public class AppDbContext : DbContext
     {
         public DbSet<Illness> Illness { get; set; }
+        public DbSet<IllnessesList> IllnessList { get; set; }
         public DbSet<FallRecord> FallRecord { get; set; }
         [NotMapped]
         public DbSet<Friendship> Friendship { get; set; }
@@ -87,6 +88,21 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<Illness>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Illness>().Property(p => p.Name).IsRequired();
             builder.Entity<Illness>().Property(p => p.Description).IsRequired();
+
+            // Illnessses List
+            builder.Entity<IllnessesList>().ToTable("illnesses_list");
+            builder.Entity<IllnessesList>().HasKey(p => p.Id);
+            builder.Entity<IllnessesList>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<IllnessesList>().Property(p => p.UserDataId).IsRequired();
+            builder.Entity<IllnessesList>().Property(p => p.IllnessId).IsRequired();
+            builder.Entity<IllnessesList>()
+                .HasOne(il => il.UserData)
+                .WithOne(ud => ud.IllnessesList)
+                .HasForeignKey<IllnessesList>(il =>il.UserDataId);
+            builder.Entity<IllnessesList>()
+                .HasOne(il => il.Illness)
+                .WithOne(i => i.IllnessesList)
+                .HasForeignKey<IllnessesList>(il => il.IllnessId);
 
             // Patient
             builder.Entity<Patient>().ToTable("patients");

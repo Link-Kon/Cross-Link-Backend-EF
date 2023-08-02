@@ -14,7 +14,7 @@ namespace Link_Backend_EF.Domain.Models
 
         public User User { get; set; }
         public Patient Patient { get; set; }
-        public List<Illness> Illnesses { get; set; }
+        public IllnessesList IllnessesList { get; set; }
         public UserDevice UserDevice { get; set; }
 
         public UserData(DateTime creationDate) : base(creationDate)

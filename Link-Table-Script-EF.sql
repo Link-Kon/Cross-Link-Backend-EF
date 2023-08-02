@@ -34,7 +34,7 @@ CREATE TABLE users (
 
 CREATE TABLE users_data (
 	id int IDENTITY,
-	active bit NOT NULL,
+	state bit NOT NULL,
 	email varchar(80) NOT NULL,
 	name varchar(80) NOT NULL,
 	lastname varchar(80) NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE users_data (
 CREATE TABLE friendship (
 	user1_code varchar(40) NOT NULL,
 	user2_code varchar(40) NOT NULL,
-	active bit NOT NULL,
+	state bit NOT NULL,
 	creation_date datetime,
 	last_update_date datetime NULL,
 	PRIMARY KEY (user1_code, user2_code),
@@ -73,10 +73,25 @@ CREATE TABLE users_devices(
 	REFERENCES devices(id)
 );
 
+CREATE TABLE illnesses_list
+(
+	id int IDENTITY,
+	user_data_id		int NOT NULL,
+	illness_id			int NOT NULL,
+	state bit NOT NULL,
+	creation_date datetime,
+	last_update_date datetime,
+	PRIMARY KEY (id),
+    CONSTRAINT FK_Usuario_Datos_Id_List FOREIGN KEY (user_data_id)
+    REFERENCES users_data(id),
+	CONSTRAINT FK_Enfermedad_Id FOREIGN KEY (illness_id)
+    REFERENCES illnesses(id)
+) 
+
 CREATE TABLE patients
 (
 	id					int IDENTITY,
-	active				bit NOT NULL,
+	state				bit NOT NULL,
 	weight				decimal(5,2) NULL,
 	height				decimal(5,2) NULL,
 	country				varchar(56) NULL,
@@ -127,18 +142,7 @@ CREATE TABLE fall_records
     REFERENCES patients(id)
 )
 
-CREATE TABLE illnesses_list
-(
-	patient_id		int NOT NULL,
-	illness_id			int NOT NULL,
-	creation_date datetime,
-	last_update_date datetime,
-	PRIMARY KEY (patient_id, illness_id),
-    CONSTRAINT FK_Usuario_Datos_Id_List FOREIGN KEY (patient_id)
-    REFERENCES patients(id),
-	CONSTRAINT FK_Enfermedad_Id FOREIGN KEY (illness_id)
-    REFERENCES illnesses(id)
-) 
+
 
 
 
