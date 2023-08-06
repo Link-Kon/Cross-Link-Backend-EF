@@ -5,7 +5,7 @@ namespace Link_Backend_EF.Domain.Models
     public class Patient : DateAuditory
     {
         public int Id { get; set; }
-        public bool Active { get; set; }
+        public bool State { get; set; }
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
         public string Country { get; set; }

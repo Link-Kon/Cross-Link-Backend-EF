@@ -4,7 +4,7 @@ namespace Link_Backend_EF.Domain.Models
 {
     public class Friendship : DateAuditory
     {
-        public bool Active { get; set; }
+        public bool State { get; set; }
         public string User1Code { get; set; }
         public string User2Code { get; set; }
 

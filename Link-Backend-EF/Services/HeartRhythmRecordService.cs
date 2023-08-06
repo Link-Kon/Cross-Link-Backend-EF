@@ -54,7 +54,7 @@ namespace Link_Backend_EF.Services
             if (result == null)
                 return new HeartRhythmRecordResponse("The patient do not exit");
 
-            if (result.Active == false)
+            if (result.State == false)
                 return new HeartRhythmRecordResponse("The patient must be active");
 
             try

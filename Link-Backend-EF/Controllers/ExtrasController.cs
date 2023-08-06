@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Link_Backend_EF_Security;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -19,21 +20,20 @@ namespace Link_Backend_EF.Controllers
         }
 
         // POST api/<TokenController>
-        [HttpGet]
+        [HttpPost]
         [AllowAnonymous]
         [Route("GetToken")]
-        public async Task<object> GetToken()
+        public async Task<object> GetToken([FromBody] string AccessToken)
         {
-
             try
             {
                 string keyV = _config["AES:Key"];
                 string iv = _config["AES:AES_IV"];
 
-                //var usuario = _usuarioInteractor.GetUsuario(AESEncDec.AESDecryption(nombreUsuario, keyV, iv), password);
+                var DescAccessToken = AESEncDec.AESDecryption(AccessToken, keyV, iv);
 
                 var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
+                        new Claim(JwtRegisteredClaimNames.Sub, AccessToken),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     };

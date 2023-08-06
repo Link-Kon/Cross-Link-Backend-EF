@@ -1,5 +1,3 @@
-DROP TABLE devices
-
 CREATE TABLE devices(
 	id int IDENTITY, 
 	nickname varchar(40) NULL,
@@ -25,7 +23,7 @@ CREATE TABLE users (
 	id int IDENTITY,
 	code varchar(40) NOT NULL,
 	username nvarchar(40),
-	password nvarchar(max),
+	token nvarchar(max),
 	creation_date datetime,
 	last_update_date datetime NULL,
 	PRIMARY KEY (id),
@@ -106,7 +104,7 @@ CREATE TABLE patients
 CREATE TABLE heart_rhythm_records
 (
 	id					int IDENTITY,
-	lectur_date			datetime NOT NULL,
+	lecture_date			datetime NOT NULL,
 	bpm					int NOT	NULL,
 	patient_id			int NOT NULL,
 	creation_date datetime,
@@ -119,7 +117,7 @@ CREATE TABLE heart_rhythm_records
 CREATE TABLE heart_issue_records
 (
 	id					int IDENTITY,
-	lectur_date		datetime NOT NULL,
+	lecture_date		datetime NOT NULL,
 	severity			varchar(20) NOT	NULL,
 	patient_id		int NOT NULL,
 	creation_date datetime,
@@ -132,7 +130,7 @@ CREATE TABLE heart_issue_records
 CREATE TABLE fall_records
 (
 	id				int IDENTITY,
-	lectur_date		datetime NOT NULL,
+	lecture_date		datetime NOT NULL,
 	severity		varchar(20) NOT	NULL,
 	patient_id	int NOT NULL,
 	creation_date datetime,

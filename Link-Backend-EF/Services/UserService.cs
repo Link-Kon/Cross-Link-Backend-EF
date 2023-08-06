@@ -100,7 +100,7 @@ namespace Link_Backend_EF.Services
                 return new UserResponse("There is already an User with this code");
 
             result.Username = model.Username;
-            result.Password = model.Password;
+            result.Token = model.Token;
 
             result.LastUpdateDate = DateTime.UtcNow;
 

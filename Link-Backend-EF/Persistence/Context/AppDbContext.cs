@@ -42,7 +42,7 @@ namespace Link_Backend_EF.Persistence.Context
             // Friendship
             builder.Entity<Friendship>().ToTable("friendship");
             builder.Entity<Friendship>().HasKey(p => new { p.User1Code, p.User2Code });
-            builder.Entity<Friendship>().Property(p => p.Active).IsRequired();
+            builder.Entity<Friendship>().Property(p => p.State).IsRequired();
             builder.Entity<Friendship>().Property(p => p.User1Code).IsRequired().HasMaxLength(40);
             builder.Entity<Friendship>().Property(p => p.User2Code).IsRequired().HasMaxLength(40);
             builder.Entity<Friendship>()
@@ -108,7 +108,7 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<Patient>().ToTable("patients");
             builder.Entity<Patient>().HasKey(p => p.Id);
             builder.Entity<Patient>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Patient>().Property(p => p.Active).IsRequired();
+            builder.Entity<Patient>().Property(p => p.State).IsRequired();
             builder.Entity<Patient>().Property(p => p.Weight).IsRequired();
             builder.Entity<Patient>().Property(p => p.Height).IsRequired();
             builder.Entity<Patient>().Property(p => p.Country).IsRequired();
@@ -124,13 +124,13 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<User>().Property(p => p.Code).IsRequired();
             builder.Entity<User>().Property(p => p.Username).IsRequired();
-            builder.Entity<User>().Property(p => p.Password).IsRequired();
+            builder.Entity<User>().Property(p => p.Token).IsRequired();
 
             // UserData
             builder.Entity<UserData>().ToTable("users_data");
             builder.Entity<UserData>().HasKey(p => p.Id);
             builder.Entity<UserData>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<UserData>().Property(p => p.Active).IsRequired();
+            builder.Entity<UserData>().Property(p => p.State).IsRequired();
             builder.Entity<UserData>().Property(p => p.Email).IsRequired();
             builder.Entity<UserData>().Property(p => p.Name).IsRequired();
             builder.Entity<UserData>().Property(p => p.Lastname).IsRequired();

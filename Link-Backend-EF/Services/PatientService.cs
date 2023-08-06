@@ -94,7 +94,7 @@ namespace Link_Backend_EF.Services
             if (result == null)
                 return new PatientResponse("Patient not found");
 
-            result.Active = model.Active;
+            result.State = model.State;
             result.Height = model.Height;
             result.Weight = model.Weight;
             result.Country = model.Country;

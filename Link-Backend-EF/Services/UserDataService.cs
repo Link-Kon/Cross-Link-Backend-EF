@@ -98,7 +98,7 @@ namespace Link_Backend_EF.Services
             if (existingUserDataEmail != null)
                 return new UserDataResponse("There is already an User with this code");
 
-            result.Active = model.Active;
+            result.State = model.State;
             result.Email = model.Email;
             result.Name = model.Name;
             result.Lastname = model.Lastname;

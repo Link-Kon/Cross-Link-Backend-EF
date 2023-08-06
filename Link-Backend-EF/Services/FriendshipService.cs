@@ -77,7 +77,7 @@ namespace Link_Backend_EF.Services
             if (result == null)
                 return new FriendshipResponse("Friendship not found");
 
-            result.Active = model.Active;
+            result.State = model.State;
 
             result.LastUpdateDate = DateTime.UtcNow;
 
