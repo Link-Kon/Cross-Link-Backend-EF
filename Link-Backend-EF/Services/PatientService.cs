@@ -35,6 +35,21 @@ namespace Link_Backend_EF.Services
             }
         }
 
+        public async Task<PatientResponse> FindByCodeAndSharedIdAsync(string code, int sharedId)
+        {
+            try
+            {
+                var result = await _repository.FindByCodeAndSharedIdAsync(code, sharedId);
+                await _unitOfWork.CompleteAsync();
+
+                return new PatientResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new PatientResponse($"An error occurred while searching for user data: {e.Message}");
+            }
+        }
+
         public async Task<PatientResponse> FindByIdAsync(int id)
         {
             try

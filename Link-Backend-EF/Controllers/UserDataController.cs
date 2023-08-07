@@ -80,5 +80,13 @@ namespace Link_Backend_EF.Controllers
             var itemResource = _mapper.Map<BaseResponse<UserData>, ValidationResource>(result);
             return Ok(itemResource);
         }
+
+        [HttpGet("{code}/{sharedId}")]
+        public async Task<UserDataResource> FindByCodeAndSharedIdAsync(string code, int sharedId)
+        {
+            var model = await _service.FindByCodeAndSharedIdAsync(code, sharedId);
+            var resource = _mapper.Map<UserData, UserDataResource>(model.Resource);
+            return resource;
+        }
     }
 }

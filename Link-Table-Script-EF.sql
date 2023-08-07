@@ -1,3 +1,5 @@
+DROP TABLE friendship
+
 CREATE TABLE devices(
 	id int IDENTITY, 
 	nickname varchar(40) NULL,
@@ -45,6 +47,7 @@ CREATE TABLE users_data (
 );
 
 CREATE TABLE friendship (
+	shared_id int IDENTITY,
 	user1_code varchar(40) NOT NULL,
 	user2_code varchar(40) NOT NULL,
 	state bit NOT NULL,

@@ -46,9 +46,6 @@ namespace Link_Backend_EF.Controllers
                     claims,
                     expires: DateTime.UtcNow.AddMinutes(10),
                     signingCredentials: signIn);
-                //PersonaEntity result = null;
-                //result = await _personaInteractor.GetPersonaByNombreUsuario(AESEncDec.AESDecryption(nombreUsuario, keyV, iv));
-                //var res = new { token = new JwtSecurityTokenHandler().WriteToken(token), persona = result };
 
                 var res = new { token = new JwtSecurityTokenHandler().WriteToken(token) };
 

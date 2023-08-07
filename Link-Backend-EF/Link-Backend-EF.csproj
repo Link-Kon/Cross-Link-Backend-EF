@@ -7,6 +7,7 @@
     <RootNamespace>Link_Backend_EF</RootNamespace>
     <UserSecretsId>42114a33-564c-49e4-9eef-7833ff432868</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>

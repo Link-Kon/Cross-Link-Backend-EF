@@ -11,7 +11,7 @@ namespace Link_Backend_EF.Resources
         [Required]
         public string Username { get; set; }
         [Required]
-        public string Password { get; set; }
+        public string Token { get; set; }
 
         public SaveUserResource(DateTime creationDate) : base(creationDate)
         {

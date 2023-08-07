@@ -5,6 +5,7 @@ using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Extensions;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Resources.Base;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Link_Backend_EF.Controllers

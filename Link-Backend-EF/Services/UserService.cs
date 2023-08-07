@@ -36,6 +36,11 @@ namespace Link_Backend_EF.Services
             }
         }
 
+        public Task<UserResponse> FindByCodeAndSharedIdAsync(string code, int sharedId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<UserResponse> FindByIdAsync(int id)
         {
             try

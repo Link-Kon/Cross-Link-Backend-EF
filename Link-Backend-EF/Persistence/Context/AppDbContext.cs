@@ -42,6 +42,7 @@ namespace Link_Backend_EF.Persistence.Context
             // Friendship
             builder.Entity<Friendship>().ToTable("friendship");
             builder.Entity<Friendship>().HasKey(p => new { p.User1Code, p.User2Code });
+            builder.Entity<Friendship>().Property(p => p.SharedId).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Friendship>().Property(p => p.State).IsRequired();
             builder.Entity<Friendship>().Property(p => p.User1Code).IsRequired().HasMaxLength(40);
             builder.Entity<Friendship>().Property(p => p.User2Code).IsRequired().HasMaxLength(40);

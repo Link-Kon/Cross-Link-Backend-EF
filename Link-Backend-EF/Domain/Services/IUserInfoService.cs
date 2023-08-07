@@ -7,5 +7,6 @@
         Task<R> FindByStringAsync(string value);
         Task<R> UpdateAsync(int id, T model);
         Task<R> DeleteAsync(int id);
+        Task<R> FindByCodeAndSharedIdAsync(string code, int sharedId);
     }
 }

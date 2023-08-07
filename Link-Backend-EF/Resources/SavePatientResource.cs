@@ -6,7 +6,7 @@ namespace Link_Backend_EF.Resources
     public class SavePatientResource : DateAuditory
     {
         [Required]
-        public bool Active { get; set; }
+        public bool State { get; set; }
         [Required]
         public float Weight { get; set; }
         [Required]

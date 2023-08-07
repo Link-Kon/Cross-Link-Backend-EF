@@ -41,5 +41,10 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
             _context.User.Update(model);
         }
+
+        public Task<User> FindByCodeAndSharedIdAsync(string code, int sharedId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

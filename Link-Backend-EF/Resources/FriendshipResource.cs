@@ -2,7 +2,7 @@
 {
     public class FriendshipResource
     {
-        public bool Active { get; set; }
+        public bool State { get; set; }
         public string User1Code { get; set; }
         public string User2Code { get; set; }
     }

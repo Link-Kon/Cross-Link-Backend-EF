@@ -4,7 +4,7 @@ using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
 
 namespace Link_Backend_EF.Services
-{   
+{
     public class UserDataService : IUserInfoService<UserData, UserDataResponse>
     {
         private readonly IUserInfoRepository<UserData> _repository;
@@ -103,7 +103,7 @@ namespace Link_Backend_EF.Services
             result.Name = model.Name;
             result.Lastname = model.Lastname;
             result.UserPhoto = model.UserPhoto;
-;
+            ;
             result.LastUpdateDate = DateTime.UtcNow;
 
             try
@@ -115,7 +115,22 @@ namespace Link_Backend_EF.Services
             }
             catch (Exception e)
             {
-                return new UserDataResponse($"An error occurred while updating the illness: {e.Message}");
+                return new UserDataResponse($"An error occurred while updating the user data: {e.Message}");
+            }
+        }
+
+        public async Task<UserDataResponse> FindByCodeAndSharedIdAsync(string code, int sharedId)
+        {
+            try
+            {
+                var result = await _repository.FindByCodeAndSharedIdAsync(code, sharedId);
+                await _unitOfWork.CompleteAsync();
+
+                return new UserDataResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new UserDataResponse($"An error occurred while searching for user data: {e.Message}");
             }
         }
     }

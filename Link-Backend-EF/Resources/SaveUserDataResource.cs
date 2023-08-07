@@ -6,7 +6,7 @@ namespace Link_Backend_EF.Resources
     public class SaveUserDataResource : DateAuditory
     {
         [Required]
-        public bool Active { get; set; }
+        public bool State { get; set; }
         [Required]
         public string Email { get; set; }
         [Required]

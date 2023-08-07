@@ -9,5 +9,6 @@ namespace Link_Backend_EF.Domain.Repositories
         Task<T> FindByStringAsync(string value);
         void Update(T model);
         void Delete(T model);
+        Task<T> FindByCodeAndSharedIdAsync(string code, int sharedId);
     }
 }

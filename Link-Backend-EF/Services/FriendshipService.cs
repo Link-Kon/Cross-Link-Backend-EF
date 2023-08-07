@@ -44,6 +44,7 @@ namespace Link_Backend_EF.Services
 
         public async Task<FriendshipResponse> SaveAsync(Friendship model)
         {
+            //REVISAR
             var existingCaretakerCode = await _userRepository.FindByCodeAsync(model.User1Code.ToString());
             if (existingCaretakerCode == null)
                 return new FriendshipResponse("User1Code not found");
