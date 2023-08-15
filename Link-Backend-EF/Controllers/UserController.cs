@@ -5,8 +5,10 @@ using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Extensions;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Resources.Base;
+using Link_Backend_EF.Services.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Link_Backend_EF.Controllers
 {
@@ -16,11 +18,13 @@ namespace Link_Backend_EF.Controllers
     {
         private readonly IUserInfoService<User, UserResponse> _service;
         private readonly IMapper _mapper;
+        public readonly ExtrasService _extrasService;
 
-        public UserController(IUserInfoService<User, UserResponse> service, IMapper mapper)
+        public UserController(IUserInfoService<User, UserResponse> service, IMapper mapper, ExtrasService extrasService)
         {
             _service = service;
             _mapper = mapper;
+            _extrasService = extrasService;
         }
 
         [HttpGet("{id}")]
@@ -44,6 +48,8 @@ namespace Link_Backend_EF.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
+            
+            resource.Token = await _extrasService.GetToken(resource.Token);
 
             var model = _mapper.Map<SaveUserResource, User>(resource);
             var result = await _service.SaveAsync(model);
@@ -53,7 +59,9 @@ namespace Link_Backend_EF.Controllers
 
             var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
 
-            return Ok(itemResource);
+            var res = new { itemResource, token = resource.Token };
+
+            return Ok(res);
         }
 
         [HttpPut("{id}")]

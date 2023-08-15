@@ -7,6 +7,7 @@ using Link_Backend_EF.Persistence.Context;
 using Link_Backend_EF.Persistence.Repositories;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Services;
+using Link_Backend_EF.Services.Base;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -42,6 +43,8 @@ builder.Services.AddScoped<IUserInfoService<Patient, PatientResponse>, PatientSe
 builder.Services.AddScoped<IIllnessService, IllnessService>();
 builder.Services.AddScoped<IListRelationService<IllnessesList, IllnessesListResponse, IllnessesListListResponse>, IllnessesListService>();
 builder.Services.AddScoped<IListRelationService<UserDevice, UserDeviceResponse, UserDeviceListResponse>, UserDeviceService>();
+
+builder.Services.AddScoped<ExtrasService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddAutoMapper(typeof(Program).Assembly);

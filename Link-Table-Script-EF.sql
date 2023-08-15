@@ -47,11 +47,11 @@ CREATE TABLE users_data (
 );
 
 CREATE TABLE friendship (
-	shared_id int IDENTITY,
+	shared_id int IDENTITY NOT NULL,
 	user1_code varchar(40) NOT NULL,
 	user2_code varchar(40) NOT NULL,
 	state bit NOT NULL,
-	creation_date datetime,
+	creation_date datetime NOT NULL,
 	last_update_date datetime NULL,
 	PRIMARY KEY (user1_code, user2_code),
 	CONSTRAINT FK_user_code_1 FOREIGN KEY (user1_code) REFERENCES users (code),
