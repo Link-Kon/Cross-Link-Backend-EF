@@ -42,6 +42,17 @@ namespace Link_Backend_EF.Services.Base
             var res = new JwtSecurityTokenHandler().WriteToken(token);
 
             return res;
-            }
+        }
+
+        public async Task<string> EncryptToken(string AccessToken)
+        {
+
+            string keyV = _config["AES:Key"];
+            string iv = _config["AES:AES_IV"];
+
+            var EncryptAccessToken = AESEncDec.AESEncryption(AccessToken, keyV, iv);
+
+            return EncryptAccessToken;
         }
     }
+}

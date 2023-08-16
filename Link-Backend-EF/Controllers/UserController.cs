@@ -61,6 +61,8 @@ namespace Link_Backend_EF.Controllers
 
             var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
 
+            resource.Token = await _extrasService.EncryptToken(resource.Token);
+
             var res = new { itemResource, token = resource.Token };
 
             return Ok(res);
@@ -85,6 +87,8 @@ namespace Link_Backend_EF.Controllers
 
             if (itemResource.Success)
             {
+                resource.NewToken = await _extrasService.EncryptToken(resource.NewToken);
+
                 var res = new { itemResource, token = resource.NewToken };
                 return Ok(res);
             }

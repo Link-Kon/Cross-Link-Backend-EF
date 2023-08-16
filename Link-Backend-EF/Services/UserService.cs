@@ -83,7 +83,7 @@ namespace Link_Backend_EF.Services
                 {
                     var userReToken = await _repository.FindByIdAsync(resource.Id);
                     userReToken.Token = resource.NewToken;
-                    userReToken.Attempt += 0;
+                    userReToken.Attempt = 0;
 
                     _repository.Update(userReToken);
                     await _unitOfWork.CompleteAsync();
