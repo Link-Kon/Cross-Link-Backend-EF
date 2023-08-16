@@ -87,7 +87,7 @@ namespace Link_Backend_EF.Services
                     _repository.Update(userReToken);
                     await _unitOfWork.CompleteAsync();
 
-                    
+                    return new UserResponse(userReToken);
                 }
                 else
                 {
@@ -96,9 +96,9 @@ namespace Link_Backend_EF.Services
 
                     _repository.Update(userWarning);
                     await _unitOfWork.CompleteAsync();
-                }
 
-                return new UserResponse(userReToken);
+                    return new UserResponse(userWarning);
+                }
             }
             catch (Exception e)
             {
