@@ -37,6 +37,7 @@ builder.Services.AddScoped<IFriendshipService, FriendshipService>();
 builder.Services.AddScoped<IHealthRecordService<FallRecord, FallRecordResponse>, FallRecordService>();
 builder.Services.AddScoped<IHealthRecordService<HeartIssuesRecord, HeartIssuesRecordResponse>, HeartIssuesRecordService>();
 builder.Services.AddScoped<IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse>, HeartRhythmRecordService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IUserInfoService<User,UserResponse>, UserService>();
 builder.Services.AddScoped<IUserInfoService<UserData, UserDataResponse>, UserDataService>();
 builder.Services.AddScoped<IUserInfoService<Patient, PatientResponse>, PatientService>();

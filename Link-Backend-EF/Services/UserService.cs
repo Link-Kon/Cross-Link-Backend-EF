@@ -2,10 +2,11 @@
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
+using Link_Backend_EF.Resources.Base;
 
 namespace Link_Backend_EF.Services
 {
-    public class UserService : IUserInfoService<User, UserResponse>
+    public class UserService : IUserInfoService<User, UserResponse>, IUserService
     {
         private readonly IUserInfoRepository<User> _repository;
         private readonly IUserRepository _userRepository;
@@ -72,6 +73,39 @@ namespace Link_Backend_EF.Services
             }
         }
 
+        public async Task<UserResponse> FindByIdAndOldTokenAsync(TokenValidationResource resource)
+        {
+            try
+            {
+                var result = await _userRepository.FindByIdAndOldTokenAsync(resource.Id, resource.OldToken);
+
+                if (result != null)
+                {
+                    var userReToken = await _repository.FindByIdAsync(resource.Id);
+                    userReToken.Token = resource.NewToken;
+
+                    _repository.Update(userReToken);
+                    await _unitOfWork.CompleteAsync();
+
+                    
+                }
+                else
+                {
+                    var userWarning = await _repository.FindByIdAsync(resource.Id);
+                    userWarning.Attempt += 1;
+
+                    _repository.Update(userWarning);
+                    await _unitOfWork.CompleteAsync();
+                }
+
+                return new UserResponse(userReToken);
+            }
+            catch (Exception e)
+            {
+                return new UserResponse($"User not found: {e.Message}");
+            }
+        }
+
         public async Task<UserResponse> SaveAsync(User model)
         {
             var existingVal = await _userRepository.FindByCodeAsync(model.Code);
@@ -82,6 +116,7 @@ namespace Link_Backend_EF.Services
             {
                 model.CreationDate = DateTime.UtcNow;
                 model.LastUpdateDate = null;
+                model.Attempt = 0;
 
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();

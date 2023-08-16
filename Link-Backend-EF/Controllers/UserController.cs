@@ -17,12 +17,14 @@ namespace Link_Backend_EF.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserInfoService<User, UserResponse> _service;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
         public readonly ExtrasService _extrasService;
 
-        public UserController(IUserInfoService<User, UserResponse> service, IMapper mapper, ExtrasService extrasService)
+        public UserController(IUserInfoService<User, UserResponse> service, IUserService userService, IMapper mapper, ExtrasService extrasService)
         {
             _service = service;
+            _userService = userService;
             _mapper = mapper;
             _extrasService = extrasService;
         }
@@ -62,6 +64,32 @@ namespace Link_Backend_EF.Controllers
             var res = new { itemResource, token = resource.Token };
 
             return Ok(res);
+        }
+
+        [HttpPost]
+        [Route("GetReToken")]
+        public async Task<IActionResult> PostAsync([FromBody] SaveTokenValidationResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            resource.NewToken = await _extrasService.GetToken(resource.NewToken);
+            var model = _mapper.Map<SaveTokenValidationResource, TokenValidationResource>(resource);
+
+            var result = await _userService.FindByIdAndOldTokenAsync(model);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
+
+            if (itemResource.Success)
+            {
+                var res = new { itemResource, token = resource.NewToken };
+                return Ok(res);
+            }
+
+            return Ok(itemResource);
         }
 
         [HttpPut("{id}")]

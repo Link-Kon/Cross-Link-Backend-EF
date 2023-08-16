@@ -26,6 +26,7 @@ CREATE TABLE users (
 	code varchar(40) NOT NULL,
 	username nvarchar(40),
 	token nvarchar(max),
+	attempt int,
 	creation_date datetime,
 	last_update_date datetime NULL,
 	PRIMARY KEY (id),

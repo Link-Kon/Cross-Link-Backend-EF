@@ -5,5 +5,6 @@ namespace Link_Backend_EF.Domain.Repositories
     public interface IUserRepository
     {
         Task<User> FindByCodeAsync(string code);
+        Task<User> FindByIdAndOldTokenAsync(int id, string token);
     }
 }

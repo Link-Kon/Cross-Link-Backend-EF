@@ -46,5 +46,10 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<User> FindByIdAndOldTokenAsync(int id, string token)
+        {
+            return await _context.User.FirstOrDefaultAsync(i => i.Id == id && i.Token == token);
+        }
     }
 }

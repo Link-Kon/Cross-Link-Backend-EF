@@ -24,7 +24,7 @@ namespace Link_Backend_EF.Controllers
         [AllowAnonymous]
         [Route("GetToken")]
         public async Task<object> GetToken([FromBody] string AccessToken)
-        {
+            {
             try
             {
                 string keyV = _config["AES:Key"];
@@ -35,7 +35,7 @@ namespace Link_Backend_EF.Controllers
                 var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, AccessToken),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
+                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.Now.ToString()),
                     };
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -44,7 +44,7 @@ namespace Link_Backend_EF.Controllers
                     _config["Jwt:Issuer"],
                     _config["Jwt:Audience"],
                     claims,
-                    expires: DateTime.UtcNow.AddMinutes(10),
+                    expires: DateTime.Now.AddMinutes(2),
                     signingCredentials: signIn);
 
                 var res = new { token = new JwtSecurityTokenHandler().WriteToken(token) };
