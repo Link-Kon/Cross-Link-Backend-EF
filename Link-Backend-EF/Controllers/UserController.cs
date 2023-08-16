@@ -75,6 +75,8 @@ namespace Link_Backend_EF.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
+
+            resource.OldToken = await _extrasService.DecryptToken(resource.OldToken);
             resource.NewToken = await _extrasService.GetToken(resource.NewToken);
             var model = _mapper.Map<SaveTokenValidationResource, TokenValidationResource>(resource);
 

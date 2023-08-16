@@ -54,5 +54,16 @@ namespace Link_Backend_EF.Services.Base
 
             return EncryptAccessToken;
         }
+
+        public async Task<string> DecryptToken(string AccessToken)
+        {
+
+            string keyV = _config["AES:Key"];
+            string iv = _config["AES:AES_IV"];
+
+            var EncryptAccessToken = AESEncDec.AESDecryption(AccessToken, keyV, iv);
+
+            return EncryptAccessToken;
+        }
     }
 }
