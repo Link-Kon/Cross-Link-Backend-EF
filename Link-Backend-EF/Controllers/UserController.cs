@@ -68,7 +68,7 @@ namespace Link_Backend_EF.Controllers
 
         [HttpPost]
         [Route("GetReToken")]
-        public async Task<IActionResult> PostAsync([FromBody] SaveTokenValidationResource resource)
+        public async Task<IActionResult> GetReToken([FromBody] SaveTokenValidationResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
@@ -78,8 +78,8 @@ namespace Link_Backend_EF.Controllers
 
             var result = await _userService.FindByIdAndOldTokenAsync(model);
 
-            if (!result.Success)
-                return BadRequest(result.Message);
+            //if (!result.Success)
+            //    return BadRequest(result.Message);
 
             var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
 

@@ -83,6 +83,7 @@ namespace Link_Backend_EF.Services
                 {
                     var userReToken = await _repository.FindByIdAsync(resource.Id);
                     userReToken.Token = resource.NewToken;
+                    userReToken.Attempt += 0;
 
                     _repository.Update(userReToken);
                     await _unitOfWork.CompleteAsync();
@@ -97,7 +98,9 @@ namespace Link_Backend_EF.Services
                     _repository.Update(userWarning);
                     await _unitOfWork.CompleteAsync();
 
-                    return new UserResponse(userWarning);
+                    string warningMessage = "El token colocado no existe";
+
+                    return new UserResponse(warningMessage);
                 }
             }
             catch (Exception e)
