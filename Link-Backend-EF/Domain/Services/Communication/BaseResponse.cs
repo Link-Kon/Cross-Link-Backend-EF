@@ -12,8 +12,15 @@
         }
         public BaseResponse(T resource)
         {
-            Success = true;
-            Resource = resource;
+            if (resource == null)
+            {
+                Success = false;
+                Resource = resource;
+            }
+            else {
+                Success = true;
+                Resource = resource;
+            }
         }
     }
 }

@@ -135,12 +135,33 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<UserData>().Property(p => p.Email).IsRequired();
             builder.Entity<UserData>().Property(p => p.Name).IsRequired();
             builder.Entity<UserData>().Property(p => p.Lastname).IsRequired();
+            builder.Entity<UserData>().Property(p => p.UserPhoto).HasMaxLength(int.MaxValue); // Assuming UserPhoto is of type string
+            builder.Entity<UserData>().Property(p => p.CreationDate);
+            builder.Entity<UserData>().Property(p => p.LastUpdateDate);
             builder.Entity<UserData>().Property(p => p.UserId).IsRequired();
+            builder.Entity<UserData>().Property(p => p.UserCode).IsRequired();
+
+            // UserData
+            builder.Entity<UserData>().ToTable("users_data");
+            builder.Entity<UserData>().HasKey(p => p.Id);
+            builder.Entity<UserData>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<UserData>().Property(p => p.State).IsRequired();
+            builder.Entity<UserData>().Property(p => p.Email).IsRequired();
+            builder.Entity<UserData>().Property(p => p.Name).IsRequired();
+            builder.Entity<UserData>().Property(p => p.Lastname).IsRequired();
+            builder.Entity<UserData>().Property(p => p.UserPhoto).HasMaxLength(int.MaxValue); // Assuming UserPhoto is of type string
+            builder.Entity<UserData>().Property(p => p.CreationDate);
+            builder.Entity<UserData>().Property(p => p.LastUpdateDate);
+            builder.Entity<UserData>().Property(p => p.UserId).IsRequired();
+            builder.Entity<UserData>().Property(p => p.UserCode).IsRequired();
+
             builder.Entity<UserData>()
                 .HasOne(u => u.User)
                 .WithOne(ud => ud.UserData)
-                .HasForeignKey<UserData>(u => u.UserId)
-                .HasPrincipalKey<User>(u => u.Id);
+                .HasForeignKey<UserData>(u => u.UserCode)
+                .HasPrincipalKey<User>(u => u.Code);
+
+
 
             // UserDevice
             builder.Entity<UserDevice>().ToTable("users_devices");

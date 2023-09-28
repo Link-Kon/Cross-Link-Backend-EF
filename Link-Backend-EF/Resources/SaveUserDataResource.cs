@@ -15,6 +15,8 @@ namespace Link_Backend_EF.Resources
         public string UserPhoto { get; set; }
         [Required]
         public int UserId { get; set; }
+        [Required]
+        public string UserCode { get; set; }
 
         public SaveUserDataResource(DateTime creationDate) : base(creationDate)
         {

@@ -14,11 +14,13 @@ namespace Link_Backend_EF.Controllers
     public class UserDataController : ControllerBase
     {
         private readonly IUserInfoService<UserData, UserDataResponse> _service;
+        private readonly IUserDataService _userDataService;
         private readonly IMapper _mapper;
 
-        public UserDataController(IUserInfoService<UserData, UserDataResponse> service, IMapper mapper)
+        public UserDataController(IUserInfoService<UserData, UserDataResponse> service, IUserDataService userDataService, IMapper mapper)
         {
             _service = service;
+            _userDataService = userDataService;
             _mapper = mapper;
         }
 
@@ -86,6 +88,18 @@ namespace Link_Backend_EF.Controllers
         {
             var model = await _service.FindByCodeAndSharedIdAsync(code, sharedId);
             var resource = _mapper.Map<UserData, UserDataResource>(model.Resource);
+            return resource;
+        }
+
+        [HttpGet("frind/{user1Code}/{user2Code}")]
+        public async Task<UserDataResource> FindByFriendAsync(string user1Code, string user2Code)
+        {
+            var model = await _userDataService.FindByFriendAsync(user1Code, user2Code);
+            var resource = _mapper.Map<UserData, UserDataResource>(model.Resource);
+            if (resource == null)
+            {
+                resource = new UserDataResource();
+            }
             return resource;
         }
     }

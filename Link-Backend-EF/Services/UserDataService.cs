@@ -5,14 +5,18 @@ using Link_Backend_EF.Domain.Services.Communication;
 
 namespace Link_Backend_EF.Services
 {
-    public class UserDataService : IUserInfoService<UserData, UserDataResponse>
+    public class UserDataService : IUserInfoService<UserData, UserDataResponse>, IUserDataService
     {
         private readonly IUserInfoRepository<UserData> _repository;
+        private readonly IUserDataRepository _userDataRepository;
+        private readonly IFriendshipService _friendshipService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserDataService(IUserInfoRepository<UserData> repository, IUnitOfWork unitOfWork)
+        public UserDataService(IUserInfoRepository<UserData> repository, IUserDataRepository userDataRepository, IFriendshipService friendshipService, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _userDataRepository = userDataRepository;
+            _friendshipService = friendshipService;
             _unitOfWork = unitOfWork;
         }
 
@@ -127,6 +131,27 @@ namespace Link_Backend_EF.Services
                 await _unitOfWork.CompleteAsync();
 
                 return new UserDataResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new UserDataResponse($"An error occurred while searching for user data: {e.Message}");
+            }
+        }
+
+        public async Task<UserDataResponse> FindByFriendAsync(string user1Code, string user2Code)
+        {
+            try
+            {
+                var verification = await _friendshipService.GetFriendshipProof(user1Code, user2Code);
+                if (verification.Success)
+                {
+                    var result = await _userDataRepository.FindByFriendAsync(user2Code);
+                    return new UserDataResponse(result);
+                }
+                else
+                {
+                    return new UserDataResponse("You cannot access to this data");
+                }
             }
             catch (Exception e)
             {

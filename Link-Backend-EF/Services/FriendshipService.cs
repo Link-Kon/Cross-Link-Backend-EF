@@ -18,6 +18,22 @@ namespace Link_Backend_EF.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<FriendshipResponse> GetFriendshipProof(string user1Code, string user2Code)
+        {
+
+            try
+            {
+                var action = await _repository.GetFriendshipProof(user1Code, user2Code);
+                await _unitOfWork.CompleteAsync();
+
+                return new FriendshipResponse(action);
+            }
+            catch (Exception e)
+            {
+                return new FriendshipResponse($"An error ocurred while saving the Friendship: {e.Message}");
+            }
+        }
+
         /*public async Task<FriendshipResponse> Delete(int id)
         {
             var result = await _repository.FindByIdAsync(id);

@@ -35,5 +35,13 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
             _context.Friendship.Update(model);
         }
+
+        public async Task<Friendship> GetFriendshipProof(string user1Code, string user2Code)
+        {
+            return await _context.Friendship.FirstOrDefaultAsync(i =>
+            ((i.User1Code == user1Code && i.User2Code == user2Code) ||
+            (i.User1Code == user2Code && i.User2Code == user1Code)) && 
+            (i.State));
+        }
     }
 }

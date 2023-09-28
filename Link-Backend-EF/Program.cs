@@ -26,6 +26,7 @@ builder.Services.AddScoped<IHealthRecordRepository<HeartIssuesRecord>, HeartIssu
 builder.Services.AddScoped<IHealthRecordRepository<HeartRhythmRecord>, HeartRhythmRecordRepository>();
 builder.Services.AddScoped<IUserInfoRepository<User>, UserRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserDataRepository, UserDataRepository>();
 builder.Services.AddScoped<IUserInfoRepository<UserData>, UserDataRepository>();
 builder.Services.AddScoped<IUserInfoRepository<Patient>, PatientRepository>();
 builder.Services.AddScoped<IIllnessRepository, IllnessRepository>();
@@ -38,6 +39,7 @@ builder.Services.AddScoped<IHealthRecordService<FallRecord, FallRecordResponse>,
 builder.Services.AddScoped<IHealthRecordService<HeartIssuesRecord, HeartIssuesRecordResponse>, HeartIssuesRecordService>();
 builder.Services.AddScoped<IHealthRecordService<HeartRhythmRecord, HeartRhythmRecordResponse>, HeartRhythmRecordService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserDataService, UserDataService>();
 builder.Services.AddScoped<IUserInfoService<User,UserResponse>, UserService>();
 builder.Services.AddScoped<IUserInfoService<UserData, UserDataResponse>, UserDataService>();
 builder.Services.AddScoped<IUserInfoService<Patient, PatientResponse>, PatientService>();

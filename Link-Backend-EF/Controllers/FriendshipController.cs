@@ -22,6 +22,18 @@ namespace Link_Backend_EF.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost("AccessProof/{user1Code}/{user2Code}")]
+        public async Task<IActionResult> GetFriendshipProof(string user1Code, string user2Code)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            var result = await _service.GetFriendshipProof(user1Code, user2Code);
+
+            var itemResource = _mapper.Map<BaseResponse<Friendship>, ValidationResource>(result);
+            return Ok(itemResource);
+        }
+
         [HttpGet("{code}")]
         public async Task<IEnumerable<FriendshipResource>> GetAllByUserCodeAsync(string code)
         {

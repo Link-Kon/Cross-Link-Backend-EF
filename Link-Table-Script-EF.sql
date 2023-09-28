@@ -1,4 +1,4 @@
-DROP TABLE friendship
+DROP TABLE users_data
 
 CREATE TABLE devices(
 	id int IDENTITY, 
@@ -43,8 +43,10 @@ CREATE TABLE users_data (
 	creation_date datetime,
 	last_update_date datetime NULL,
 	user_id int NOT NULL,
+	user_code varchar(40) NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_id) REFERENCES users (id)
+	FOREIGN KEY (user_id) REFERENCES users (id),
+	FOREIGN KEY (user_code) REFERENCES users (code)
 );
 
 CREATE TABLE friendship (

@@ -9,5 +9,6 @@ namespace Link_Backend_EF.Domain.Services
         Task<IEnumerable<Friendship>> ListByUserCodeAsync(string code);
         Task<FriendshipResponse> UpdateAsync(Friendship model);
         //Task<FriendshipResponse> Delete(int id);
+        Task<FriendshipResponse> GetFriendshipProof(string user1Code, string user2Code);
     }
 }
