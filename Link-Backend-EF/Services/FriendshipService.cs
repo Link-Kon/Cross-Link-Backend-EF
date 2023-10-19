@@ -74,14 +74,14 @@ namespace Link_Backend_EF.Services
 
             try
             {
-                model.CreationDate = DateTime.UtcNow;
+                model.CreationDate = DateTime.UtcNow;   
                 model.LastUpdateDate = null;
 
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
                 return new FriendshipResponse(model);
-            }
+            }       
             catch (Exception e)
             {
                 return new FriendshipResponse($"An error ocurred while saving the Friendship: {e.Message}");

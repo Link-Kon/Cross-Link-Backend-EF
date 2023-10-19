@@ -50,17 +50,18 @@ CREATE TABLE users_data (
 	FOREIGN KEY (user_code) REFERENCES users (code)
 );
 
+
 CREATE TABLE friendship (
-	shared_id int IDENTITY NOT NULL,
-	user1_code varchar(40) NOT NULL,
-	user2_code varchar(40) NOT NULL,
-	state bit NOT NULL,
-	creation_date datetime NOT NULL,
-	last_update_date datetime NULL,
-	PRIMARY KEY (user1_code, user2_code),
-	CONSTRAINT FK_user_code_1 FOREIGN KEY (user1_code) REFERENCES users (code),
-	CONSTRAINT FK_user_2_code FOREIGN KEY (user2_code) REFERENCES users (code),
-	CHECK (user1_code <> user2_code)
+    shared_id int IDENTITY NOT NULL,
+    user1_code varchar(40) NOT NULL,
+    user2_code varchar(40) NOT NULL,
+    state bit NOT NULL,
+    creation_date datetime NOT NULL,
+    last_update_date datetime NULL,
+    PRIMARY KEY (shared_id),
+    CONSTRAINT FK_user_code_1 FOREIGN KEY (user1_code) REFERENCES users (code),
+    CONSTRAINT FK_user_2_code FOREIGN KEY (user2_code) REFERENCES users (code),
+    CHECK (user1_code <> user2_code)
 );
 
 
