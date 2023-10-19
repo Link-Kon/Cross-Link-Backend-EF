@@ -1,15 +1,16 @@
 DROP TABLE users_data
 
 CREATE TABLE devices(
-	id int IDENTITY, 
-	nickname varchar(40) NULL,
-	mac_address varchar(20),
-	model varchar(40) NULL,
-	version decimal(5,2) NULL,
-   	creation_date datetime,
-	last_update_date datetime NULL,
-   PRIMARY KEY (id),
+    id int IDENTITY, 
+    nickname varchar(40) NULL,
+    mac_address varchar(20),
+    model varchar(40) NULL,
+    version decimal(5,2) NULL,
+    creation_date datetime,
+    last_update_date datetime NULL,
+    PRIMARY KEY (id)
 );
+	
 
 CREATE TABLE illnesses(
 	id int IDENTITY, 
@@ -64,17 +65,15 @@ CREATE TABLE friendship (
 
 
 CREATE TABLE users_devices(
-	id int IDENTITY,
-	user_data_id int NOT NULL,
-	device_id int NOT NULL,
-	state bit NOT NULL,
-	creation_date datetime,
-	last_update_date datetime NULL,
-	PRIMARY KEY (id),
-	CONSTRAINT FK_user_data_id FOREIGN KEY (user_data_id)
-	REFERENCES users_data(id),
-	CONSTRAINT FK_device_id FOREIGN KEY (device_id)
-	REFERENCES devices(id)
+    id int IDENTITY,
+    user_data_id int NOT NULL,
+    device_id int NOT NULL,
+    state bit NOT NULL,
+    creation_date datetime,
+    last_update_date datetime NULL,
+    PRIMARY KEY (id),
+    CONSTRAINT FK_user_data_id FOREIGN KEY (user_data_id) REFERENCES users_data(id),
+    CONSTRAINT FK_device_id FOREIGN KEY (device_id) REFERENCES devices(id)
 );
 
 CREATE TABLE illnesses_list
@@ -145,8 +144,4 @@ CREATE TABLE fall_records
     CONSTRAINT FK_patient_user_3 FOREIGN KEY (patient_id)
     REFERENCES patients(id)
 )
-
-
-
-
 

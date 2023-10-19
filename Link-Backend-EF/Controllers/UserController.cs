@@ -52,7 +52,6 @@ namespace Link_Backend_EF.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
             
             resource.Token = await _extrasService.GetToken(resource.Token);
-
             var model = _mapper.Map<SaveUserResource, User>(resource);
             var result = await _service.SaveAsync(model);
 
@@ -62,7 +61,7 @@ namespace Link_Backend_EF.Controllers
             var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
 
             resource.Token = await _extrasService.EncryptToken(resource.Token);
-
+                
             var res = new { itemResource, token = resource.Token };
 
             return Ok(res);
@@ -74,7 +73,6 @@ namespace Link_Backend_EF.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
-
 
             resource.OldToken = await _extrasService.DecryptToken(resource.OldToken);
             resource.NewToken = await _extrasService.GetToken(resource.NewToken);
@@ -103,6 +101,8 @@ namespace Link_Backend_EF.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
+
+            resource.Token = await _extrasService.GetToken(resource.Token);
 
             var model = _mapper.Map<SaveUserResource, User>(resource);
             var result = await _service.UpdateAsync(id, model);

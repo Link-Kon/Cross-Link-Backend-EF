@@ -19,6 +19,7 @@ namespace Link_Backend_EF.Persistence.Context
         public DbSet<User> User { get; set; }
         public DbSet<UserData> UserData { get; set; }
         public DbSet<UserDevice> UserDevice { get; set; }
+        public DbSet<Device> Device { get; set; }
         public AppDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -178,6 +179,17 @@ namespace Link_Backend_EF.Persistence.Context
                 .WithOne(d => d.UserDevice)
                 .HasForeignKey<UserDevice>(f => f.DeviceId);
 
+            // Device
+            builder.Entity<Device>().ToTable("devices");
+            builder.Entity<Device>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Device>().Property(p => p.Nickname).IsRequired();
+            builder.Entity<Device>().Property(p => p.MacAddress).IsRequired();
+            builder.Entity<Device>().Property(p => p.Model).IsRequired();
+            builder.Entity<Device>().Property(p => p.Version).IsRequired();
+            builder.Entity<UserDevice>()
+                .HasOne(il => il.Device)
+                .WithOne(i => i.UserDevice)
+                .HasForeignKey<UserDevice>(il => il.DeviceId);
 
 
             builder.UseSnakeCaseNamingConvention();

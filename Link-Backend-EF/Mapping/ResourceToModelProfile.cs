@@ -19,6 +19,7 @@ namespace Link_Backend_EF.Mapping
             CreateMap<SaveUserResource, User>();
             CreateMap<SaveUserDataResource, UserData>();
             CreateMap<SaveUserDeviceResource, UserDevice>();
+            CreateMap<SaveDeviceResource, Device>();
 
             CreateMap<SaveTokenValidationResource, TokenValidationResource>();
         }

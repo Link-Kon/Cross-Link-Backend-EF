@@ -91,7 +91,7 @@ namespace Link_Backend_EF.Controllers
             return resource;
         }
 
-        [HttpGet("frind/{user1Code}/{user2Code}")]
+        [HttpGet("friend/{user1Code}/{user2Code}")]
         public async Task<UserDataResource> FindByFriendAsync(string user1Code, string user2Code)
         {
             var model = await _userDataService.FindByFriendAsync(user1Code, user2Code);

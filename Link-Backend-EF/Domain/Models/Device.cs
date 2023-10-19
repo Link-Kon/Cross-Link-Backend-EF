@@ -8,7 +8,7 @@ namespace Link_Backend_EF.Domain.Models
         public string? Nickname { get; set; }
         public string MacAddress { get; set; }
         public string Model { get; set; }
-        public double Version { get; set; } 
+        public decimal Version { get; set; } 
         public UserDevice UserDevice { get; set; }
 
         public Device(DateTime creationDate) : base(creationDate)

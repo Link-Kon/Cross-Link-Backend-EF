@@ -5,6 +5,6 @@
         public int Id { get; set; }
         public string OldToken { get; set; }
         public string NewToken { get; set; }
-        public int Attmps { get; set; }
+        public int Attempt { get; set; }
     }
 }

@@ -20,7 +20,9 @@ namespace Link_Backend_EF.Mapping
             CreateMap<Patient, PatientResource>();
             CreateMap<User, UserResource>();
             CreateMap<UserData, UserDataResource>();
+
             CreateMap<UserDevice, UserDeviceResource>();
+            CreateMap<Device, DeviceResource>();
 
             //Validation Resource
             CreateMap(typeof(BaseResponse<>), typeof(ValidationResource));

@@ -25,7 +25,7 @@ namespace Link_Backend_EF.Services.Base
             var DescAccessToken = AESEncDec.AESDecryption(AccessToken, keyV, iv);
 
             var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, AccessToken),
+                        new Claim(JwtRegisteredClaimNames.Sub, DescAccessToken),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     };
@@ -40,6 +40,7 @@ namespace Link_Backend_EF.Services.Base
                 signingCredentials: signIn);
 
             var res = new JwtSecurityTokenHandler().WriteToken(token);
+
 
             return res;
         }
