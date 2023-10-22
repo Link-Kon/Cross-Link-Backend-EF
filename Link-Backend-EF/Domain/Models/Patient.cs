@@ -15,9 +15,5 @@ namespace Link_Backend_EF.Domain.Models
         public List<FallRecord> FallRecords { get; set; }
         public List<HeartIssuesRecord> HeartIssuesRecords { get; set; }
         public List<HeartRhythmRecord> HeartRhythmRecords { get; set; }
-
-        public Patient(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

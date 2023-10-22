@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Domain.Models
 
         public User User1 { get; set; }
         public User User2 { get; set; }
-
-        public Friendship(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

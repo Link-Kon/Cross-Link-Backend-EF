@@ -54,7 +54,7 @@ namespace Link_Backend_EF.Services
             }
         }
 
-        // Find by Email
+        // Find by Code
         public async Task<UserDataResponse> FindByStringAsync(string value)
         {
             try
@@ -150,7 +150,7 @@ namespace Link_Backend_EF.Services
                 }
                 else
                 {
-                    return new UserDataResponse("You cannot access to this data");
+                    return new UserDataResponse("There is nothing to search");
                 }
             }
             catch (Exception e)

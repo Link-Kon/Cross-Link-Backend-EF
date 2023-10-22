@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Domain.Models
 
         public Patient Patient { get; set; }
 
-        public HeartRhythmRecord(DateTime creationDate) : base(creationDate)
-        {
-        }
-
     }
 }

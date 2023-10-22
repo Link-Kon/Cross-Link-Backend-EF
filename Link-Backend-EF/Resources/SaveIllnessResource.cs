@@ -12,9 +12,5 @@ namespace Link_Backend_EF.Resources
         public string Description { get; set; }
 
         public int? CreatorId { get; set; }
-
-        public SaveIllnessResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

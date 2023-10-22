@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Resources
         public int Bpm { get; set; }
         [Required]
         public int PatientId { get; set; }
-
-        public SaveHeartRhythmRecordResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

@@ -44,7 +44,7 @@ namespace Link_Backend_EF.Services
 
             try
             {
-                model.CreationDate = DateTime.UtcNow;
+                model.CreationDate   = DateTime.UtcNow;
                 model.LastUpdateDate = null;
 
                 await _repository.AddAsync(model);

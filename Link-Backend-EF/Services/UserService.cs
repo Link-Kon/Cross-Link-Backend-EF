@@ -9,15 +9,18 @@ namespace Link_Backend_EF.Services
     public class UserService : IUserInfoService<User, UserResponse>, IUserService
     {
         private readonly IUserInfoRepository<User> _repository;
+        private readonly IUserInfoRepository<UserData> _userDatarepository;
         private readonly IUserRepository _userRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserService(IUserInfoRepository<User> repository, IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public UserService(IUserInfoRepository<User> repository, IUserInfoRepository<UserData> userDatarepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
+            _userDatarepository = userDatarepository;
             _userRepository = userRepository;
             _unitOfWork = unitOfWork;
         }
+
         public async Task<UserResponse> DeleteAsync(int id)
         {
             var result = await _repository.FindByIdAsync(id);
@@ -62,10 +65,12 @@ namespace Link_Backend_EF.Services
         {
             try
             {
-                var result = await _repository.FindByStringAsync(value);
+                var result1 = await _repository.FindByStringAsync(value);
+                var result2 = await _userDatarepository.FindByStringAsync(result1.Code);
+
                 await _unitOfWork.CompleteAsync();
 
-                return new UserResponse(result);
+                return new UserResponse(result2);
             }
             catch (Exception e)
             {
@@ -117,6 +122,7 @@ namespace Link_Backend_EF.Services
 
             try
             {
+                model.Code = Guid.NewGuid().ToString();
                 model.CreationDate = DateTime.UtcNow;
                 model.LastUpdateDate = null;
                 model.Attempt = 0;

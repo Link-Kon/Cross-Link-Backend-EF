@@ -26,10 +26,10 @@ namespace Link_Backend_EF.Persistence.Repositories
             return await _context.UserData.FindAsync(id);
         }
 
-        // Find by Email
+        // Find by Code
         public async Task<UserData> FindByStringAsync(string value)
         {
-            return await _context.UserData.FirstOrDefaultAsync(i => i.Email == value);
+            return await _context.UserData.FirstOrDefaultAsync(i => i.UserCode == value);
         }
 
         public void Update(UserData model)

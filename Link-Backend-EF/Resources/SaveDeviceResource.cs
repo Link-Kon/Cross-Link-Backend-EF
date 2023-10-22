@@ -8,8 +8,5 @@ namespace Link_Backend_EF.Resources
         public string MacAddress { get; set; }
         public string Model { get; set; }
         public decimal Version { get; set; }
-        public SaveDeviceResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

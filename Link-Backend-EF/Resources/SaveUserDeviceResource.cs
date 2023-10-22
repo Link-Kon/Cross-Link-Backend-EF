@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Resources
         public int DeviceId { get; set; }
         [Required]
         public bool State { get; set; }
-
-        public SaveUserDeviceResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

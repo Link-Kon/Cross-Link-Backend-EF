@@ -24,6 +24,8 @@ namespace Link_Backend_EF.Mapping
             CreateMap<UserDevice, UserDeviceResource>();
             CreateMap<Device, DeviceResource>();
 
+            CreateMap<UserData, UserPublicResource>();
+
             //Validation Resource
             CreateMap(typeof(BaseResponse<>), typeof(ValidationResource));
             CreateMap(typeof(BaseResponse<List<UserDevice>>), typeof(UserDeviceResource));

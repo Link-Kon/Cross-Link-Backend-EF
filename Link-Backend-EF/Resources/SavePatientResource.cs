@@ -15,9 +15,5 @@ namespace Link_Backend_EF.Resources
         public string Country { get; set; }
         [Required]
         public int UserDataId { get; set; }
-
-        public SavePatientResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

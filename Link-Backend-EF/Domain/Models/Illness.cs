@@ -10,9 +10,5 @@ namespace Link_Backend_EF.Domain.Models
         public int? CreatorId { get; set; }
 
         public IllnessesList IllnessesList { get; set; }
-
-        public Illness(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

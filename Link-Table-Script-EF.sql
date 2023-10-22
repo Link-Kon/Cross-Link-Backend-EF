@@ -48,7 +48,7 @@ CREATE TABLE users_data (
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id) REFERENCES users (id),
 	FOREIGN KEY (user_code) REFERENCES users (code)
-);
+);	
 
 
 CREATE TABLE friendship (

@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Resources
         public string Severity { get; set; }
         [Required]
         public int PatientId { get; set; }
-
-        public SaveFallRecordResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

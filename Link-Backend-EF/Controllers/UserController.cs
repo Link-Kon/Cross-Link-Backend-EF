@@ -38,10 +38,10 @@ namespace Link_Backend_EF.Controllers
         }
 
         [HttpGet("GetByUsername/{username}")]
-        public async Task<UserResource> GetByUsernameAsync(string username)
+        public async Task<UserPublicResource> GetByUsernameAsync(string username)
         {
             var model = await _service.FindByStringAsync(username);
-            var resources = _mapper.Map<User, UserResource>(model.Resource);
+            var resources = _mapper.Map<UserData, UserPublicResource>(model.Resource2);
             return resources;
         }
 
@@ -62,7 +62,7 @@ namespace Link_Backend_EF.Controllers
 
             resource.Token = await _extrasService.EncryptToken(resource.Token);
                 
-            var res = new { itemResource, token = resource.Token };
+            var res = new { itemResource, token = result.Resource.Token, result.Resource.Code };
 
             return Ok(res);
         }

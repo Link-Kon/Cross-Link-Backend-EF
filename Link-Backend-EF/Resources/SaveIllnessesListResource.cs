@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Resources
         public int IllnessId { get; set; }
         [Required]
         public bool State { get; set; }
-
-        public SaveIllnessesListResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

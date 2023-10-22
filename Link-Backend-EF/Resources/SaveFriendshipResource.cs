@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Resources
         public string User1Code { get; set; }
         [Required]
         public string User2Code { get; set; }
-
-        public SaveFriendshipResource(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

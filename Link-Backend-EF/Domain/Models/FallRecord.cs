@@ -10,9 +10,5 @@ namespace Link_Backend_EF.Domain.Models
         public int PatientId { get; set; }
 
         public Patient Patient { get; set; }
-
-        public FallRecord(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

@@ -11,9 +11,5 @@ namespace Link_Backend_EF.Domain.Models
 
         public UserData UserData { get; set; }
         public Device Device { get; set; }
-
-        public UserDevice(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }

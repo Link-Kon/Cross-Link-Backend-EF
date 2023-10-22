@@ -4,10 +4,5 @@
     {
         public DateTime CreationDate { get; set; }
         public DateTime? LastUpdateDate { get; set; }
-
-        public DateAuditory(DateTime creationDate)
-        {
-            CreationDate = creationDate;
-        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Link_Backend_EF.Domain.Services.Communication
+﻿using Link_Backend_EF.Domain.Models;
+
+namespace Link_Backend_EF.Domain.Services.Communication
 {
     public class BaseResponse<T>
     {
@@ -20,6 +22,21 @@
             else {
                 Success = true;
                 Resource = resource;
+            }
+        }
+
+        public UserData Resource2 { get; private set; }
+        public BaseResponse(UserData resource)
+        {
+            if (resource == null)
+            {
+                Success = false;
+                Resource2 = resource;
+            }
+            else
+            {
+                Success = true;
+                Resource2 = resource;
             }
         }
     }

@@ -10,9 +10,5 @@ namespace Link_Backend_EF.Domain.Models
         public string Model { get; set; }
         public decimal Version { get; set; } 
         public UserDevice UserDevice { get; set; }
-
-        public Device(DateTime creationDate) : base(creationDate)
-        {
-        }
     }
 }
