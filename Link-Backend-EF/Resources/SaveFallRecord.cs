@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveFallRecordResource : DateAuditory
+    public class SaveFallRecordResource
     {
         [Required]
         public DateTime LectureDate { get; set; }

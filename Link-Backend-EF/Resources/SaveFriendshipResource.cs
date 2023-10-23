@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveFriendshipResource : DateAuditory
+    public class SaveFriendshipResource
     {
         [Required]
         public bool State { get; set; }

@@ -59,6 +59,8 @@ namespace Link_Backend_EF.Services
 
             try
             {
+                model.CreationDate = DateTime.UtcNow;
+
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
 
@@ -76,6 +78,7 @@ namespace Link_Backend_EF.Services
             if (result == null)
                 return new HeartRhythmRecordResponse("HeartRhythmRecord not found");
 
+            result.LastUpdateDate = DateTime.UtcNow;
             result.LectureDate = model.LectureDate;
             result.Bpm = model.Bpm;
 

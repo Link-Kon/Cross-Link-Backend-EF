@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveHeartRhythmRecordResource : DateAuditory
+    public class SaveHeartRhythmRecordResource
     {
         [Required]
         public DateTime LectureDate { get; set; }

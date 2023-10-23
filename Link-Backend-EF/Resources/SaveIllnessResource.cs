@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveIllnessResource : DateAuditory
+    public class SaveIllnessResource
     {
         [Required]
         public string Name { get; set; }

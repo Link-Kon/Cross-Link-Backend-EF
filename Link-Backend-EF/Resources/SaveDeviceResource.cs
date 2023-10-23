@@ -2,7 +2,7 @@
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveDeviceResource : DateAuditory
+    public class SaveDeviceResource
     {
         public string Nickname { get; set; }
         public string MacAddress { get; set; }

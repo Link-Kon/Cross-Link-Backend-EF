@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Link_Backend_EF.Resources
 {
-    public class SaveUserDeviceResource : DateAuditory
+    public class SaveUserDeviceResource
     {
         [Required]
         public int UserDataId { get; set; }
