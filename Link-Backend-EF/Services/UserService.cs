@@ -165,5 +165,21 @@ namespace Link_Backend_EF.Services
                 return new UserResponse($"An error occurred while updating the user: {e.Message}");
             }
         }
+
+        public async Task<UserResponse> FindByCodeAsync(string code)
+        {
+            try
+            {
+                var result = await _userRepository.FindByCodeAsync(code);
+
+                await _unitOfWork.CompleteAsync();
+
+                return new UserResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new UserResponse($"User not found: {e.Message}");
+            }
+        }
     }
 }

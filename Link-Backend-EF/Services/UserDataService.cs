@@ -10,13 +10,15 @@ namespace Link_Backend_EF.Services
         private readonly IUserInfoRepository<UserData> _repository;
         private readonly IUserDataRepository _userDataRepository;
         private readonly IFriendshipService _friendshipService;
+        private readonly IUserService _userService;
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserDataService(IUserInfoRepository<UserData> repository, IUserDataRepository userDataRepository, IFriendshipService friendshipService, IUnitOfWork unitOfWork)
+        public UserDataService(IUserInfoRepository<UserData> repository, IUserDataRepository userDataRepository, IFriendshipService friendshipService, IUserService userService, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _userDataRepository = userDataRepository;
             _friendshipService = friendshipService;
+            _userService = userService;
             _unitOfWork = unitOfWork;
         }
 
@@ -76,8 +78,13 @@ namespace Link_Backend_EF.Services
             if (existingUserDataEmail != null)
                 return new UserDataResponse("There is already an userData with this email");
 
+            var existingUserCodeFound = await _userService.FindByCodeAsync(model.UserCode);
+            if (existingUserDataEmail != null)
+                return new UserDataResponse("An error ocurred, please try again latr");
+
             try
             {
+                model.UserId = existingUserCodeFound.Resource.Id;
                 model.CreationDate = DateTime.UtcNow;
                 model.LastUpdateDate = null;
 
