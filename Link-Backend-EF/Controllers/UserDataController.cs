@@ -32,11 +32,11 @@ namespace Link_Backend_EF.Controllers
             return resource;
         }
 
-        [HttpGet("GetByEmail/{email}")]
-        public async Task<UserDataResource> GetByEmailAsync(string username)
+        [HttpGet("GetByUserCode/{userCode}")]
+        public async Task<UserDataResource> GetByEmailAsync(string userCode)
         {
-            var model = await _service.FindByStringAsync(username);
-            var resources = _mapper.Map<UserData, UserDataResource>(model.Resource);
+            var model = await _service.FindByStringAsync(userCode);
+            var resources = _mapper.Map<UserData, UserDataResource>(model.Resource2);
             return resources;
         }
 
