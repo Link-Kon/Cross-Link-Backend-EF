@@ -1,10 +1,13 @@
-﻿using Link_Backend_EF_Security;
+﻿using Link_Backend_EF.Resources.Extras;
+using Link_Backend_EF_Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Python.Runtime;
+using System.Diagnostics;
 
 namespace Link_Backend_EF.Controllers
 {
@@ -59,9 +62,24 @@ namespace Link_Backend_EF.Controllers
         }
 
         [HttpGet]
+        [Route("GetData")]
+        public async Task GetData([FromBody] SaveArduinoDataListResource Data)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpGet]
         [Authorize]
-        [Route("Try")]
-        public bool TryValue()
+        [Route("TryAuthorize")]
+        public bool TryAuthorize()
         {
             return true;
         }
