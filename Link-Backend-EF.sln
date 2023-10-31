@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Link-Backend-EF", "Link-Bac
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Link-Backend-EF-Security", "Link-Backend-EF-Security\Link-Backend-EF-Security.csproj", "{7CABDF06-50E1-413A-9229-246C0792595E}"
 EndProject
-Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "Link-Backend-EF-Functions", "Link-Backend-EF-Functions\Link-Backend-EF-Functions.pyproj", "{9CD9D5B9-DED7-4CC5-AFBD-297C74F61947}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,8 +21,6 @@ Global
 		{7CABDF06-50E1-413A-9229-246C0792595E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CABDF06-50E1-413A-9229-246C0792595E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CABDF06-50E1-413A-9229-246C0792595E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9CD9D5B9-DED7-4CC5-AFBD-297C74F61947}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9CD9D5B9-DED7-4CC5-AFBD-297C74F61947}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
