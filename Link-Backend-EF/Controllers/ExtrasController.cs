@@ -8,6 +8,14 @@ using System.Security.Claims;
 using System.Text;
 using Python.Runtime;
 using System.Diagnostics;
+using System;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Components.Forms;
+using System.Text.Json;
+using Link_Backend_EF.Resources.Base;
+using Link_Backend_EF.Domain.Models;
+using Link_Backend_EF.Resources;
+using AutoMapper;
 
 namespace Link_Backend_EF.Controllers
 {
@@ -16,10 +24,14 @@ namespace Link_Backend_EF.Controllers
     public class ExtrasController : ControllerBase
     {
         public readonly IConfiguration _config;
+        private readonly HttpClient _httpClient;
+        private readonly IMapper _mapper;
 
-        public ExtrasController(IConfiguration config)
+        public ExtrasController(IConfiguration config, HttpClient httpClient, IMapper mapper)
         {
             _config = config;
+            _httpClient = httpClient;
+            _mapper = mapper;
         }
 
         // POST api/<TokenController>
@@ -61,20 +73,33 @@ namespace Link_Backend_EF.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("GetData")]
-        public async Task GetData([FromBody] SaveArduinoDataListResource Data)
-        {
-            try
+            [HttpPost]
+            [Route("GetData")]
+            public async Task<IActionResult> GetData([FromBody] SaveArduinoDataListResource Data)
             {
+                try
+                {
+                    var model = _mapper.Map<SaveArduinoDataListResource, AWSHeartArduinoDataListResource>(Data);
+                    // Serialize the InputData object to JSON
+                    string jsonInput = JsonSerializer.Serialize(model);
 
-            }
-            catch (Exception)
-            {
+                    HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await _httpClient.PostAsync("https://wym2umlgx5.execute-api.us-east-2.amazonaws.com/default/GetData", content);
+                    
+                    // Check if the response is successful
+                    response.EnsureSuccessStatusCode();
 
-                throw;
+                    // Deserialize the response JSON to the expected object
+                    string jsonResponse = await response.Content.ReadAsStringAsync();
+                    ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+
+                    return Ok(responseData);
+                }
+                catch (Exception ex)
+                {
+                    return BadRequest(ex.Message);
+                }
             }
-        }
 
         [HttpGet]
         [Authorize]

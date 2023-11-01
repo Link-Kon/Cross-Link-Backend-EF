@@ -2,6 +2,7 @@
 using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Resources.Base;
+using Link_Backend_EF.Resources.Extras;
 
 namespace Link_Backend_EF.Mapping
 {
@@ -22,6 +23,9 @@ namespace Link_Backend_EF.Mapping
             CreateMap<SaveDeviceResource, Device>();
 
             CreateMap<SaveTokenValidationResource, TokenValidationResource>();
+
+            CreateMap<SaveArduinoDataResource, AWSHeartArduinoDataResource>();
+            CreateMap<SaveArduinoDataListResource, AWSHeartArduinoDataListResource>();
         }
     }
 }
