@@ -24,8 +24,11 @@ namespace Link_Backend_EF.Mapping
 
             CreateMap<SaveTokenValidationResource, TokenValidationResource>();
 
-            CreateMap<SaveArduinoDataResource, AWSHeartArduinoDataResource>();
-            CreateMap<SaveArduinoDataListResource, AWSHeartArduinoDataListResource>();
+            CreateMap<SaveArduinoHeartDataResource, AWSHeartArduinoDataResource>();
+            CreateMap<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>();
+
+            CreateMap<SaveArduinoGyroDataResource, AWSGyroArduinoDataResource>();
+            CreateMap<SaveArduinoGyroDataListResource, AWSGyroArduinoDataListResource>();
         }
     }
 }
