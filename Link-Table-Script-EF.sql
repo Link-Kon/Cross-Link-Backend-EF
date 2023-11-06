@@ -27,7 +27,7 @@ CREATE TABLE users (
 	code varchar(40) NOT NULL,
 	username nvarchar(40),
 	token nvarchar(max),
-	notification_token nvarchar(40) NULL,
+	device_token nvarchar(40) NULL,
 	attempt int,
 	creation_date datetime,
 	last_update_date datetime NULL,
