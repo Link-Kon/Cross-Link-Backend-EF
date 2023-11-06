@@ -4,7 +4,7 @@ namespace Link_Backend_Google_Services.PushNotifications
 {
     public class BasePuhNotification
     {
-        public async Task SendNotifications(string title, string body, string strPath, string strISSync, string image, List<TokenDevice> tokenDevices)
+        public async Task SendNotifications(string title, string body, List<TokenDevice> tokenDevices)
         {
             //string key = Settings.AESKey.aesKey;
             //string iv = Settings.AESIv.aesIV;
@@ -20,14 +20,14 @@ namespace Link_Backend_Google_Services.PushNotifications
                         Title = title,
                         Body = body
                     },
-                    //Token = descDeviceToken,
+                    ////Token = descDeviceToken,
                     Token = tokenDevice.DeviceToken,
-                    Data = new Dictionary<string, string>
-                    {
-                        { "Path", strPath },
-                        { "IsSync", strISSync },
-                        { "ImageUrl", image }
-                    }
+                    //Data = new Dictionary<string, string>
+                    //{
+                    //    { "Path", strPath },
+                    //    { "IsSync", strISSync },
+                    //    { "ImageUrl", image }
+                    //}
                 };
 
                 try

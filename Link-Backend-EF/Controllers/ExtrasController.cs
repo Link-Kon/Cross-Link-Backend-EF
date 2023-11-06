@@ -17,6 +17,7 @@ using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Resources;
 using AutoMapper;
 using Link_Backend_Google_Services.PushNotifications;
+using Link_Backend_EF.Services.Base;
 
 namespace Link_Backend_EF.Controllers
 {
@@ -28,13 +29,15 @@ namespace Link_Backend_EF.Controllers
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
         private readonly BasePuhNotification _basePuhNotification;
+        private readonly ExtrasService _extrasService;
 
-        public ExtrasController(IConfiguration config, HttpClient httpClient, IMapper mapper, BasePuhNotification basePuhNotification)
+        public ExtrasController(IConfiguration config, HttpClient httpClient, IMapper mapper, BasePuhNotification basePuhNotification, ExtrasService extrasService)
         {
             _config = config;
             _httpClient = httpClient;
             _mapper = mapper;
             _basePuhNotification = basePuhNotification;
+            _extrasService = extrasService;
         }
 
 
@@ -84,21 +87,31 @@ namespace Link_Backend_EF.Controllers
         {
             try
             {
-                var model = _mapper.Map<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>(Data);
-                // Serialize the InputData object to JSON
-                string jsonInput = JsonSerializer.Serialize(model);
+                object responseData = new object();
 
-                HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await _httpClient.PostAsync("https://wym2umlgx5.execute-api.us-east-2.amazonaws.com/default/GetData", content);
-                    
-                // Check if the response is successful
-                response.EnsureSuccessStatusCode();
+                //var model = _mapper.Map<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>(Data);
+                //// Serialize the InputData object to JSON
+                //string jsonInput = JsonSerializer.Serialize(model);
 
-                // Deserialize the response JSON to the expected object
-                string jsonResponse = await response.Content.ReadAsStringAsync();
-                ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+                //HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+                //HttpResponseMessage response = await _httpClient.PostAsync("https://wym2umlgx5.execute-api.us-east-2.amazonaws.com/default/GetData", content);
 
-                //await _basePuhNotification.SendNotifications()
+                //// Check if the response is successful
+                //response.EnsureSuccessStatusCode();
+
+                //// Deserialize the response JSON to the expected object
+                //string jsonResponse = await response.Content.ReadAsStringAsync();
+                //ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+
+                List<TokenDevice> tokens = new List<TokenDevice>();
+                tokens = await _extrasService.GetDevicesToken(Data.UserCode);
+                List<TokenDevice> tokens2 = new List<TokenDevice>();
+                tokens2.Add(new TokenDevice
+                {
+                    DeviceToken = "fCsMX39FTWOeSA1udgSClt:APA91bHbCvdgrBh9dSidIMGrHJtC5crs_FGb4ehQ8QbysMfqg31r3yMi_4Kie-qJySkcBot-CXksPwKykqueCEI0it9EPKEXrw_03ptIeVb3_eWbNmtgC_PT5uE7TBD1aeGFCd4tGBz0"
+                });
+
+                await _basePuhNotification.SendNotifications("Prueba", "Patrick eres feo", tokens2);
 
                 return Ok(responseData);
             }

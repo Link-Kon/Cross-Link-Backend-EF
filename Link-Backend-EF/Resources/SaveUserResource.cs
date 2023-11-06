@@ -10,5 +10,7 @@ namespace Link_Backend_EF.Resources
         public string Username { get; set; }
         [Required]
         public string Token { get; set; }
+        [Required]
+        public string DeviceToken { get; set; }
     }
 }

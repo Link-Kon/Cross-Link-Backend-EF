@@ -1,3 +1,5 @@
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
@@ -8,6 +10,7 @@ using Link_Backend_EF.Persistence.Repositories;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Services;
 using Link_Backend_EF.Services.Base;
+using Link_Backend_Google_Services.PushNotifications;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -49,6 +52,7 @@ builder.Services.AddScoped<IIllnessService, IllnessService>();
 builder.Services.AddScoped<IListRelationService<IllnessesList, IllnessesListResponse, IllnessesListListResponse>, IllnessesListService>();
 builder.Services.AddScoped<IListRelationService<UserDevice, UserDeviceResponse, UserDeviceListResponse>, UserDeviceService>();
 
+builder.Services.AddScoped<BasePuhNotification>();
 builder.Services.AddScoped<ExtrasService>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -94,6 +98,23 @@ builder.Services.AddSwaggerGen(c =>
                     }
                 });
 });
+
+try
+{
+    FirebaseApp.Create(new AppOptions
+    {
+        Credential = GoogleCredential.FromFile("cross-link-firebase-token.json"),
+    });
+
+    // Firebase SDK initialization successful
+    // Proceed with your Firebase operations here
+}
+catch (Exception ex)
+{
+    // Firebase SDK initialization failed
+    // Handle the exception or log an error message
+    Console.WriteLine("Firebase initialization error: " + ex.Message);
+}
 
 // Authentication init service
 builder.Services.AddAuthentication(options =>

@@ -126,7 +126,6 @@ namespace Link_Backend_EF.Services
                 model.CreationDate = DateTime.UtcNow;
                 model.LastUpdateDate = null;
                 model.Attempt = 0;
-                model.DeviceToken = "Pending";
 
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
