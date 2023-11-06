@@ -6,6 +6,7 @@ namespace Link_Backend_EF.Domain.Models
     {
         public int Id { get; set; }
         public string Code { get; set; }
+        public string DeviceToken { get; set; }
         public string Username { get; set; }
         public string Token { get; set; }
         public int Attempt { get; set; }

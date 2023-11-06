@@ -29,13 +29,13 @@ namespace Link_Backend_EF.Controllers
             _extrasService = extrasService;
         }
 
-        [HttpGet("{id}")]
-        public async Task<UserResource> GetByIdAsync(int id)
-        {
-            var model = await _service.FindByIdAsync(id);
-            var resource = _mapper.Map<User, UserResource>(model.Resource);
-            return resource;
-        }
+        //[HttpGet("{id}")]
+        //public async Task<UserResource> GetByIdAsync(int id)
+        //{
+        //    var model = await _service.FindByIdAsync(id);
+        //    var resource = _mapper.Map<User, UserResource>(model.Resource);
+        //    return resource;
+        //}
 
         [HttpGet("GetByUsername/{username}")]
         public async Task<UserPublicResource> GetByUsernameAsync(string username)
@@ -96,15 +96,33 @@ namespace Link_Backend_EF.Controllers
             return Ok(itemResource);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
+        //{
+        //    if (!ModelState.IsValid)
+        //        return BadRequest(ModelState.GetErrorMessages());
+
+        //    resource.Token = await _extrasService.GetToken(resource.Token);
+
+        //    var model = _mapper.Map<SaveUserResource, User>(resource);
+        //    var result = await _service.UpdateAsync(id, model);
+
+        //    if (!result.Success)
+        //        return BadRequest(result.Message);
+
+        //    var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
+        //    return Ok(itemResource);
+        //}
+
+        [HttpPut("VerifyToken")]
+        public async Task<IActionResult> VerifyToken(int id, [FromBody] UpdateUserResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             resource.Token = await _extrasService.GetToken(resource.Token);
 
-            var model = _mapper.Map<SaveUserResource, User>(resource);
+            var model = _mapper.Map<UpdateUserResource, User>(resource);
             var result = await _service.UpdateAsync(id, model);
 
             if (!result.Success)

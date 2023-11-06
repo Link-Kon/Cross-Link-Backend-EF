@@ -125,6 +125,7 @@ namespace Link_Backend_EF.Persistence.Context
             builder.Entity<User>().HasKey(p => p.Id);
             builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<User>().Property(p => p.Code).IsRequired();
+            builder.Entity<User>().Property(p => p.DeviceToken);
             builder.Entity<User>().Property(p => p.Username).IsRequired();
             builder.Entity<User>().Property(p => p.Token).IsRequired();
 

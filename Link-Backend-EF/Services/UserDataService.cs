@@ -74,13 +74,13 @@ namespace Link_Backend_EF.Services
 
         public async Task<UserDataResponse> SaveAsync(UserData model)
         {
-            var existingUserDataEmail = await _repository.FindByStringAsync(model.Email);
-            if (existingUserDataEmail != null)
-                return new UserDataResponse("There is already an userData with this email");
+            //var existingUserDataEmail = await _repository.FindByStringAsync(model.Email);
+            //if (existingUserDataEmail != null)
+            //    return new UserDataResponse("There is already an userData with this email");
 
             var existingUserCodeFound = await _userService.FindByCodeAsync(model.UserCode);
-            if (existingUserDataEmail != null)
-                return new UserDataResponse("An error ocurred, please try again latr");
+            if (existingUserCodeFound.Resource.Code != model.UserCode)
+                return new UserDataResponse("An error ocurred, please try again later");
 
             try
             {

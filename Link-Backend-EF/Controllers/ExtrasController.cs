@@ -16,6 +16,7 @@ using Link_Backend_EF.Resources.Base;
 using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Resources;
 using AutoMapper;
+using Link_Backend_Google_Services.PushNotifications;
 
 namespace Link_Backend_EF.Controllers
 {
@@ -26,13 +27,17 @@ namespace Link_Backend_EF.Controllers
         public readonly IConfiguration _config;
         private readonly HttpClient _httpClient;
         private readonly IMapper _mapper;
+        private readonly BasePuhNotification _basePuhNotification;
 
-        public ExtrasController(IConfiguration config, HttpClient httpClient, IMapper mapper)
+        public ExtrasController(IConfiguration config, HttpClient httpClient, IMapper mapper, BasePuhNotification basePuhNotification)
         {
             _config = config;
             _httpClient = httpClient;
             _mapper = mapper;
+            _basePuhNotification = basePuhNotification;
         }
+
+
 
         // POST api/<TokenController>
         [HttpPost]
@@ -74,8 +79,8 @@ namespace Link_Backend_EF.Controllers
         }
 
         [HttpPost]
-        [Route("GetData")]
-        public async Task<IActionResult> GetData([FromBody] SaveArduinoHeartDataListResource Data)
+        [Route("GetHeartPrediction")]
+        public async Task<IActionResult> GetHeartPrediction([FromBody] SaveArduinoHeartDataListResource Data)
         {
             try
             {
@@ -92,6 +97,8 @@ namespace Link_Backend_EF.Controllers
                 // Deserialize the response JSON to the expected object
                 string jsonResponse = await response.Content.ReadAsStringAsync();
                 ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+
+                //await _basePuhNotification.SendNotifications()
 
                 return Ok(responseData);
             }

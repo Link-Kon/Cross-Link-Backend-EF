@@ -68,6 +68,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Link-Backend-EF-Security\Link-Backend-EF-Security.csproj" />
+    <ProjectReference Include="..\Link-Backend-Google-Services\Link-Backend-Google-Services.csproj" />
   </ItemGroup>
 
 </Project>

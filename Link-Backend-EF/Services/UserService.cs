@@ -126,6 +126,7 @@ namespace Link_Backend_EF.Services
                 model.CreationDate = DateTime.UtcNow;
                 model.LastUpdateDate = null;
                 model.Attempt = 0;
+                model.DeviceToken = "Pending";
 
                 await _repository.AddAsync(model);
                 await _unitOfWork.CompleteAsync();
@@ -140,16 +141,24 @@ namespace Link_Backend_EF.Services
 
         public async Task<UserResponse> UpdateAsync(int id, User model)
         {
-            var result = await _repository.FindByIdAsync(id);
+            var result = await _userRepository.FindByCodeAsync(model.Code);
             if (result == null)
                 return new UserResponse("User not found");
 
-            var existingUserCode = await _userRepository.FindByCodeAsync(model.Code);
-            if (existingUserCode != null)
-                return new UserResponse("There is already an User with this code");
+            //var existingUserCode = await _userRepository.FindByCodeAsync(model.Code);
+            //if (existingUserCode != null)
+            //    return new UserResponse("There is already an User with this code");
 
-            result.Username = model.Username;
-            result.Token = model.Token;
+            //result.Username = model.Username;
+            if (result.Token == model.Token)
+            {
+                model.Token = result.Token;
+            }
+            else
+            {
+                result.Token = model.Token;
+            }
+            result.DeviceToken = model.DeviceToken;
 
             result.LastUpdateDate = DateTime.UtcNow;
 
