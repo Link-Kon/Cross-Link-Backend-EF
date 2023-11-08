@@ -22,12 +22,12 @@ namespace Link_Backend_Google_Services.PushNotifications
                     },
                     ////Token = descDeviceToken,
                     Token = tokenDevice.DeviceToken,
-                    //Data = new Dictionary<string, string>
-                    //{
-                    //    { "Path", strPath },
-                    //    { "IsSync", strISSync },
-                    //    { "ImageUrl", image }
-                    //}
+                    Data = new Dictionary<string, string>
+                    {
+                        { "Payload", "Sevridad" },
+                        { "HeartValue", "0.51" }
+                        //{ "ImageUrl", image }
+                    }
                 };
 
                 try

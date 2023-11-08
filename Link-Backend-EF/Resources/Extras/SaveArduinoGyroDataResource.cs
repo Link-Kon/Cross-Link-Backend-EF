@@ -2,17 +2,17 @@
 {
     public class SaveArduinoGyroDataResource
     {
-        public double AccelX { get; set; }
-        public double AccelY { get; set; }
-        public double AccelZ { get; set; }
-        public double RotX { get; set; }
-        public double RotY { get; set; }
-        public double RotZ { get; set; }
+        public decimal AccelX { get; set; }
+        public decimal AccelY { get; set; }
+        public decimal AccelZ { get; set; }
+        public decimal RotX { get; set; }
+        public decimal RotY { get; set; }
+        public decimal RotZ { get; set; }
     }
 
     public class SaveArduinoGyroDataListResource
     {
-        public List<SaveArduinoHeartDataResource> Gyros { get; set; }
+        public List<SaveArduinoGyroDataResource> Gyros { get; set; }
         public string UserCode { get; set; }
     }
 }
