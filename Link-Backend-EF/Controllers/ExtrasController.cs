@@ -87,21 +87,21 @@ namespace Link_Backend_EF.Controllers
         {
             try
             {
-                object responseData = new object();
+                //object responseData = new object();
 
-                //var model = _mapper.Map<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>(Data);
-                // Serialize the InputData object to JSON
-                //string jsonInput = JsonSerializer.Serialize(model);
+                var model = _mapper.Map<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>(Data);
+                 //Serialize the InputData object to JSON
+                string jsonInput = JsonSerializer.Serialize(model);
 
-                //HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-                //HttpResponseMessage response = await _httpClient.PostAsync("https://fr296zhuhd.execute-api.us-east-2.amazonaws.com/default/GetHeartPrediction", content);
+                HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _httpClient.PostAsync("https://fr296zhuhd.execute-api.us-east-2.amazonaws.com/default/GetHeartPrediction", content);
 
-                //// Check if the response is successful
-                //response.EnsureSuccessStatusCode();
+                // Check if the response is successful
+                response.EnsureSuccessStatusCode();
 
-                //// Deserialize the response JSON to the expected object
-                //string jsonResponse = await response.Content.ReadAsStringAsync();
-                //ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+                // Deserialize the response JSON to the expected object
+                string jsonResponse = await response.Content.ReadAsStringAsync();
+                ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
 
                 List<TokenDevice> tokens = new List<TokenDevice>();
                 tokens = await _extrasService.GetDevicesToken(Data.UserCode);
