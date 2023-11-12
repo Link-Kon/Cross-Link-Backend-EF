@@ -35,11 +35,11 @@ namespace Link_Backend_EF.Controllers
         }
 
         [HttpGet("{code}")]
-        public async Task<IEnumerable<FriendshipResource>> GetAllByUserCodeAsync(string code)
+        public async Task<IEnumerable<FriendshipListResponse>> GetAllByUserCodeAsync(string code)
         {
-            var models = await _service.ListByUserCodeAsync(code);
-            var resources = _mapper.Map<IEnumerable<Friendship>, IEnumerable<FriendshipResource>>(models);
-            return resources;
+            var model = await _service.ListByUserCodeAsync(code);
+            //var resources = _mapper.Map<IEnumerable<Friendship>, IEnumerable<FriendshipResource>>(models);
+            return model;
         }
 
         [HttpPost]

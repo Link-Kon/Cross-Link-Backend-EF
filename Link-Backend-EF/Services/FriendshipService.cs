@@ -2,6 +2,7 @@
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Domain.Services;
 using Link_Backend_EF.Domain.Services.Communication;
+using Link_Backend_EF.Resources;
 
 namespace Link_Backend_EF.Services
 {
@@ -9,12 +10,14 @@ namespace Link_Backend_EF.Services
     {
         private readonly IFriendshipRepository _repository;
         private readonly IUserRepository _userRepository;
+        private readonly IUserInfoRepository<UserData> _userDataRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public FriendshipService(IFriendshipRepository repository, IUserRepository userRepository, IUnitOfWork unitOfWork)
+        public FriendshipService(IFriendshipRepository repository, IUserRepository userRepository, IUserInfoRepository<UserData> userDataRepository, IUnitOfWork unitOfWork)
         {
             _repository = repository;
             _userRepository = userRepository;
+            _userDataRepository = userDataRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -53,9 +56,34 @@ namespace Link_Backend_EF.Services
             }
         }*/
 
-        public async Task<IEnumerable<Friendship>> ListByUserCodeAsync(string code)
+        public async Task<IEnumerable<FriendshipListResponse>> ListByUserCodeAsync(string code)
         {
-            return await _repository.ListByUserCodeAsync(code);
+            var response = new List<FriendshipListResponse>();
+
+            var result = await _repository.ListByUserCodeAsync(code);
+
+            // Filter the results to include only distinct user codes related to the given code
+            var distinctResult = result
+                .Where(f => f.User1Code == code || f.User2Code == code)
+                .SelectMany(f => new[] { f.User1Code, f.User2Code })
+                .Distinct()
+                .Where(userCode => userCode != code)
+                .ToList();
+
+            for (int i = 0; i < distinctResult.Count; i++)
+            {
+                var userCodesResult = await _userDataRepository.FindByStringAsync(distinctResult[i]);
+                var itemList = new FriendshipListResponse()
+                {
+                    Code = distinctResult[i],
+                    Name = userCodesResult.Name,
+                    Lastname = userCodesResult.Lastname,
+                    CreationDate = userCodesResult.CreationDate
+                };
+                response.Add(itemList);
+            }
+
+            return response;
         }
 
         public async Task<FriendshipResponse> SaveAsync(Friendship model)
