@@ -105,13 +105,8 @@ namespace Link_Backend_EF.Controllers
 
                 List<TokenDevice> tokens = new List<TokenDevice>();
                 tokens = await _extrasService.GetDevicesToken(Data.UserCode);
-                List<TokenDevice> tokens2 = new List<TokenDevice>();
-                tokens2.Add(new TokenDevice
-                {
-                    DeviceToken = "dbFX2GL0QEKKxutqpdUaEU:APA91bHQplylxwjjN2ndOhI-7_3leA07dL9yid15fWHgEw0Lgm9jCvG1s1CLVdWI44O9Dx_IVNG_R86Yx3018TDOi2LXUOCSlMM0Ut_CaPDclkaR8EJdMGVZxDyBHRry4I2YPtiVOQak"
-                });
 
-                await _basePuhNotification.SendNotifications("Prueba", "Patrick eres feo", tokens2);
+                await _basePuhNotification.SendNotifications("Prueba", "Patrick eres feo", tokens);
                     
                 return Ok(responseData);
             }
