@@ -24,7 +24,7 @@ CREATE TABLE illnesses(
 
 CREATE TABLE users (
 	id int IDENTITY,
-	code varchar(40) NOT NULL,
+	code varchar(40) NOT NULL,	
 	username nvarchar(40),
 	token nvarchar(max),
 	device_token nvarchar(40) NULL,

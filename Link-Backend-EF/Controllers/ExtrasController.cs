@@ -89,12 +89,12 @@ namespace Link_Backend_EF.Controllers
             {
                 object responseData = new object();
 
-                var model = _mapper.Map<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>(Data);
+                //var model = _mapper.Map<SaveArduinoHeartDataListResource, AWSHeartArduinoDataListResource>(Data);
                 // Serialize the InputData object to JSON
-                string jsonInput = JsonSerializer.Serialize(model);
+                //string jsonInput = JsonSerializer.Serialize(model);
 
                 //HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-                //HttpResponseMessage response = await _httpClient.PostAsync("https://wym2umlgx5.execute-api.us-east-2.amazonaws.com/default/GetData", content);
+                //HttpResponseMessage response = await _httpClient.PostAsync("https://fr296zhuhd.execute-api.us-east-2.amazonaws.com/default/GetHeartPrediction", content);
 
                 //// Check if the response is successful
                 //response.EnsureSuccessStatusCode();
@@ -108,11 +108,11 @@ namespace Link_Backend_EF.Controllers
                 List<TokenDevice> tokens2 = new List<TokenDevice>();
                 tokens2.Add(new TokenDevice
                 {
-                    DeviceToken = "eovZ5kuRR8GtYFIytX5rKw:APA91bEoZ7Z7gWV-S3Cb73purrKu--4B5cgXoxGd9Ai8biu9RoxgAjOEkDjJUzb-F6ZPntIsn4gWy51JVel9VqhqzLlKu05NzoB9EM79i21VRwON7mRr1PfDCtH22PqsK8700ziKt__S"
+                    DeviceToken = "dbFX2GL0QEKKxutqpdUaEU:APA91bHQplylxwjjN2ndOhI-7_3leA07dL9yid15fWHgEw0Lgm9jCvG1s1CLVdWI44O9Dx_IVNG_R86Yx3018TDOi2LXUOCSlMM0Ut_CaPDclkaR8EJdMGVZxDyBHRry4I2YPtiVOQak"
                 });
 
                 await _basePuhNotification.SendNotifications("Prueba", "Patrick eres feo", tokens2);
-
+                    
                 return Ok(responseData);
             }
             catch (Exception ex)

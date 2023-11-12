@@ -66,6 +66,14 @@ namespace Link_Backend_EF.Services
             try
             {
                 var result1 = await _repository.FindByStringAsync(value);
+
+                // Check if result1 is null
+                if (result1 == null)
+                {
+                    // Handle the case where result1 is null
+                    return new UserResponse("User not found");
+                }
+
                 var result2 = await _userDatarepository.FindByStringAsync(result1.Code);
 
                 await _unitOfWork.CompleteAsync();
