@@ -38,11 +38,18 @@ namespace Link_Backend_EF.Controllers
         //}
 
         [HttpGet("GetByUsername/{username}")]
-        public async Task<UserPublicResource> GetByUsernameAsync(string username)
+        public async Task<IActionResult> GetByUsernameAsync(string username)
         {
             var model = await _service.FindByStringAsync(username);
-            var resources = _mapper.Map<UserData, UserPublicResource>(model.Resource2);
-            return resources;
+            if (model.Resource2 != null)
+            {
+                var resources = _mapper.Map<UserData, UserPublicResource>(model.Resource2);
+                return Ok(resources);
+            }
+            else
+            {
+                return BadRequest(model.Message);
+            }
         }
 
         [HttpPost]
