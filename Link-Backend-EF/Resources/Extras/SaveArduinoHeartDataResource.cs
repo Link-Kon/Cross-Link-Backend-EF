@@ -10,5 +10,6 @@
     {
         public List<SaveArduinoHeartDataResource> Reds { get; set; }
         public string UserCode { get; set; }
+        public string Username { get; set; }
     }
 }

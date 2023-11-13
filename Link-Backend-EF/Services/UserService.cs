@@ -142,7 +142,7 @@ namespace Link_Backend_EF.Services
             }
             catch (Exception e)
             {
-                return new UserResponse($"An error ocurred while saving the illness: {e.Message}");
+                return new UserResponse($"An error ocurred while saving the user: {e.Message}");
             }
         }
 

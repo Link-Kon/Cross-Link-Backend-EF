@@ -101,12 +101,25 @@ namespace Link_Backend_EF.Controllers
 
                 // Deserialize the response JSON to the expected object
                 string jsonResponse = await response.Content.ReadAsStringAsync();
-                ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+                AWSValidationResource responseData = JsonSerializer.Deserialize<AWSValidationResource>(jsonResponse);
 
-                List<TokenDevice> tokens = new List<TokenDevice>();
-                tokens = await _extrasService.GetDevicesToken(Data.UserCode);
+                decimal outputValue;
+                if (Decimal.TryParse(responseData.Output, out outputValue))
+                {
+                    if (outputValue > 0.5m)
+                    {
+                        List<TokenDevice> tokens = new List<TokenDevice>();
+                        tokens = await _extrasService.GetDevicesToken(Data.UserCode);
 
-                await _basePuhNotification.SendNotifications("Prueba", "Patrick eres feo", tokens);
+                        await _basePuhNotification.SendNotifications("Emergency - " + Data.Username, Data.Username + " is on an emergency, check it up, now!!!", tokens);
+                    }
+                }
+                else
+                {
+                    // Handle the case when parsing fails
+                }
+
+                
                     
                 return Ok(responseData);
             }
@@ -127,14 +140,14 @@ namespace Link_Backend_EF.Controllers
                 string jsonInput = JsonSerializer.Serialize(model);
 
                 HttpContent content = new StringContent(jsonInput, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await _httpClient.PostAsync("https://ngyrommg1a.execute-api.us-east-2.amazonaws.com/default/FallEvent2", content);
+                HttpResponseMessage response = await _httpClient.PostAsync("https://yeb19zvzh4.execute-api.us-east-2.amazonaws.com/default/GetGyroPrediction", content);
 
                 // Check if the response is successful
                 response.EnsureSuccessStatusCode();
 
                 // Deserialize the response JSON to the expected object
                 string jsonResponse = await response.Content.ReadAsStringAsync();
-                ValidationResource responseData = JsonSerializer.Deserialize<ValidationResource>(jsonResponse);
+                AWSValidationResource responseData = JsonSerializer.Deserialize<AWSValidationResource>(jsonResponse);
 
                 return Ok(responseData);
             }

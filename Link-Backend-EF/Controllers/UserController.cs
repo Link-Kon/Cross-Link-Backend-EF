@@ -69,7 +69,7 @@ namespace Link_Backend_EF.Controllers
 
             resource.Token = await _extrasService.EncryptToken(resource.Token);
                 
-            var res = new { itemResource, token = result.Resource.Token, result.Resource.Code };
+            var res = new { itemResource, token = result.Resource.Token, userCode = result.Resource.Code };
 
             return Ok(res);
         }

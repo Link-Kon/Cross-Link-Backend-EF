@@ -14,5 +14,6 @@
     {
         public List<SaveArduinoGyroDataResource> Gyros { get; set; }
         public string UserCode { get; set; }
+        public string Username { get; set; }
     }
 }
