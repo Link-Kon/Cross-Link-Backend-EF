@@ -3,6 +3,7 @@ using Link_Backend_EF.Domain.Models;
 using Link_Backend_EF.Domain.Services.Communication;
 using Link_Backend_EF.Resources;
 using Link_Backend_EF.Resources.Base;
+using Link_Backend_EF.Resources.Extras;
 using Microsoft.OpenApi.Any;
 
 namespace Link_Backend_EF.Mapping
@@ -25,6 +26,8 @@ namespace Link_Backend_EF.Mapping
             CreateMap<Device, DeviceResource>();
 
             CreateMap<UserData, UserPublicResource>();
+
+            CreateMap<AWSValidationResource, ValidationResource>();
 
             //Validation Resource
             CreateMap(typeof(BaseResponse<>), typeof(ValidationResource));

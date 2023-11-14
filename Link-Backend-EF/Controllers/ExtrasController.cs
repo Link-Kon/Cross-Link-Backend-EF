@@ -103,6 +103,10 @@ namespace Link_Backend_EF.Controllers
                 string jsonResponse = await response.Content.ReadAsStringAsync();
                 AWSValidationResource responseData = JsonSerializer.Deserialize<AWSValidationResource>(jsonResponse);
 
+                var itemResource = _mapper.Map<AWSValidationResource, ValidationResource>(responseData);
+
+                var res = new { itemResource, output = responseData.Output };
+
                 decimal outputValue;
                 if (Decimal.TryParse(responseData.Output, out outputValue))
                 {
@@ -118,10 +122,8 @@ namespace Link_Backend_EF.Controllers
                 {
                     // Handle the case when parsing fails
                 }
-
-                
                     
-                return Ok(responseData);
+                return Ok(res);
             }
             catch (Exception ex)
             {
@@ -148,8 +150,27 @@ namespace Link_Backend_EF.Controllers
                 // Deserialize the response JSON to the expected object
                 string jsonResponse = await response.Content.ReadAsStringAsync();
                 AWSValidationResource responseData = JsonSerializer.Deserialize<AWSValidationResource>(jsonResponse);
+                var itemResource = _mapper.Map<AWSValidationResource, ValidationResource>(responseData);
 
-                return Ok(responseData);
+                var res = new { itemResource, output = responseData.Output };
+
+                decimal outputValue;
+                if (Decimal.TryParse(responseData.Output, out outputValue))
+                {
+                    if (outputValue > 0.5m)
+                    {
+                        List<TokenDevice> tokens = new List<TokenDevice>();
+                        tokens = await _extrasService.GetDevicesToken(Data.UserCode);
+
+                        await _basePuhNotification.SendNotifications("Emergency - " + Data.Username, Data.Username + " is on an emergency, check it up, now!!!", tokens);
+                    }
+                }
+                else
+                {
+                    // Handle the case when parsing fails
+                }
+
+                return Ok(res);
             }
             catch (Exception ex)
             {
