@@ -27,7 +27,7 @@ namespace Link_Backend_Google_Services.PushNotifications
                     //    { "Payload", "Sevridad" },
                     //    { "HeartValue", "0.51" }
                     //    //{ "ImageUrl", image }
-                    //}
+                    //} 
                 };
 
                 try

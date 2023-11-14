@@ -110,7 +110,8 @@ namespace Link_Backend_EF.Controllers
                 decimal outputValue;
                 if (Decimal.TryParse(responseData.Output, out outputValue))
                 {
-                    if (outputValue > 0.5m)
+                    //if (outputValue > 0.5m)
+                    if (outputValue < 0.5m)
                     {
                         List<TokenDevice> tokens = new List<TokenDevice>();
                         tokens = await _extrasService.GetDevicesToken(Data.UserCode);
@@ -157,7 +158,8 @@ namespace Link_Backend_EF.Controllers
                 decimal outputValue;
                 if (Decimal.TryParse(responseData.Output, out outputValue))
                 {
-                    if (outputValue > 0.5m)
+                    //if (outputValue > 0.5m)
+                    if (outputValue < 0.5m)
                     {
                         List<TokenDevice> tokens = new List<TokenDevice>();
                         tokens = await _extrasService.GetDevicesToken(Data.UserCode);
