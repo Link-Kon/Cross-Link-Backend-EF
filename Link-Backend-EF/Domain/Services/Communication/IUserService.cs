@@ -5,6 +5,7 @@ namespace Link_Backend_EF.Domain.Services.Communication
 {
     public interface IUserService
     {
+        Task<string> GetDeviceTokenByUserCode(string code);
         Task<UserResponse> FindByCodeAsync(string code);
         Task<UserResponse> FindByIdAndOldTokenAsync(TokenValidationResource resource);
     }

@@ -197,5 +197,22 @@ namespace Link_Backend_EF.Services
                 return new UserResponse($"User not found: {e.Message}");
             }
         }
+
+        public async Task<string> GetDeviceTokenByUserCode(string code)
+        {
+            var result = "";
+            try
+            {
+                result = await _userRepository.GetDeviceTokenByUserCode(code);
+
+                await _unitOfWork.CompleteAsync();
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return result = "User not found";
+            }
+        }
     }
 }

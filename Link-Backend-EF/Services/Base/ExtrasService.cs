@@ -84,16 +84,19 @@ namespace Link_Backend_EF.Services.Base
             {
                 if (friendship.User1Code != userCode)
                 {
+                    var deviceToken = await _userRepository.GetDeviceTokenByUserCode(friendship.User1Code);
                     tokenDevices.Add(new TokenDevice
                     {
-                        DeviceToken = friendship.User1Code
+                        DeviceToken = deviceToken
+
                     });
                 }
                 else
                 {
+                    var deviceToken = await _userRepository.GetDeviceTokenByUserCode(friendship.User2Code);
                     tokenDevices.Add(new TokenDevice
                     {
-                        DeviceToken = friendship.User2Code
+                        DeviceToken = deviceToken
                     });
                 }
             }

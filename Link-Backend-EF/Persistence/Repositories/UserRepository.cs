@@ -2,6 +2,7 @@
 using Link_Backend_EF.Domain.Repositories;
 using Link_Backend_EF.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace Link_Backend_EF.Persistence.Repositories
 {
@@ -51,5 +52,16 @@ namespace Link_Backend_EF.Persistence.Repositories
         {
             return await _context.User.FirstOrDefaultAsync(i => i.Id == id && i.Token == token);
         }
+
+        public async Task<string> GetDeviceTokenByUserCode(string code)
+        {
+            var user = await _context.User.FirstOrDefaultAsync(i => i.Code == code);
+            if (user != null)
+            {
+                return user.DeviceToken;
+            }
+            return null;
+        }
+
     }
 }
