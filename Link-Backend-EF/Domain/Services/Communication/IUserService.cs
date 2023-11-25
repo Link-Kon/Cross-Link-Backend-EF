@@ -8,5 +8,6 @@ namespace Link_Backend_EF.Domain.Services.Communication
         Task<string> GetDeviceTokenByUserCode(string code);
         Task<UserResponse> FindByCodeAsync(string code);
         Task<UserResponse> FindByIdAndOldTokenAsync(TokenValidationResource resource);
+        Task<UserResponse> UpdateDeviceTokenAsync(string userCode, User model);
     }
 }

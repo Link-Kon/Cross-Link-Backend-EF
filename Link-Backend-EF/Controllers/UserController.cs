@@ -57,7 +57,7 @@ namespace Link_Backend_EF.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
-            
+
             resource.Token = await _extrasService.GetToken(resource.Token);
             var model = _mapper.Map<SaveUserResource, User>(resource);
             var result = await _service.SaveAsync(model);
@@ -68,7 +68,7 @@ namespace Link_Backend_EF.Controllers
             var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
 
             resource.Token = await _extrasService.EncryptToken(resource.Token);
-                
+
             var res = new { itemResource, token = result.Resource.Token, userCode = result.Resource.Code };
 
             return Ok(res);
@@ -103,34 +103,34 @@ namespace Link_Backend_EF.Controllers
             return Ok(itemResource);
         }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
-        //{
-        //    if (!ModelState.IsValid)
-        //        return BadRequest(ModelState.GetErrorMessages());
-
-        //    resource.Token = await _extrasService.GetToken(resource.Token);
-
-        //    var model = _mapper.Map<SaveUserResource, User>(resource);
-        //    var result = await _service.UpdateAsync(id, model);
-
-        //    if (!result.Success)
-        //        return BadRequest(result.Message);
-
-        //    var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
-        //    return Ok(itemResource);
-        //}
-
-        [HttpPut("VerifyToken")]
-        public async Task<IActionResult> VerifyToken(int id, [FromBody] UpdateUserResource resource)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutAsync(int id, [FromBody] SaveUserResource resource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
             resource.Token = await _extrasService.GetToken(resource.Token);
 
-            var model = _mapper.Map<UpdateUserResource, User>(resource);
+            var model = _mapper.Map<SaveUserResource, User>(resource);
             var result = await _service.UpdateAsync(id, model);
+
+            if (!result.Success)
+                return BadRequest(result.Message);
+
+            var itemResource = _mapper.Map<BaseResponse<User>, ValidationResource>(result);
+            return Ok(itemResource);
+        }
+
+        [HttpPut("VerifyDeviceToken/{userCode}")]
+        public async Task<IActionResult> VerifyToken(string userCode, [FromBody] UpdateUserResource resource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.GetErrorMessages());
+
+            //resource.Token = await _extrasService.GetToken(resource.Token);
+
+            var model = _mapper.Map<UpdateUserResource, User>(resource);
+            var result = await _userService.UpdateDeviceTokenAsync(userCode, model);
 
             if (!result.Success)
                 return BadRequest(result.Message);

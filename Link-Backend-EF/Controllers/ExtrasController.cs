@@ -159,7 +159,7 @@ namespace Link_Backend_EF.Controllers
                 if (Decimal.TryParse(responseData.Output, out outputValue))
                 {
                     //if (outputValue > 0.5m)
-                    if (outputValue < 0.5m)
+                    if (outputValue >= 8.0m)
                     {
                         List<TokenDevice> tokens = new List<TokenDevice>();
                         tokens = await _extrasService.GetDevicesToken(Data.UserCode);

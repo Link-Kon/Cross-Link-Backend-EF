@@ -157,16 +157,39 @@ namespace Link_Backend_EF.Services
             //    return new UserResponse("There is already an User with this code");
 
             //result.Username = model.Username;
-            if (result.Token == model.Token)
-            {
-                model.Token = result.Token;
-            }
-            else
-            {
-                result.Token = model.Token;
-            }
+            
+            //if (result.Token == model.Token)
+            //{
+            //    model.Token = result.Token;
+            //}
+            //else
+            //{
+            //    result.Token = model.Token;
+            //}
             result.DeviceToken = model.DeviceToken;
 
+            result.LastUpdateDate = DateTime.UtcNow;
+
+            try
+            {
+                _repository.Update(result);
+                await _unitOfWork.CompleteAsync();
+
+                return new UserResponse(result);
+            }
+            catch (Exception e)
+            {
+                return new UserResponse($"An error occurred while updating the user: {e.Message}");
+            }
+        }
+
+        public async Task<UserResponse> UpdateDeviceTokenAsync(string userCode, User model)
+        {
+            var result = await _userRepository.FindByCodeAsync(userCode);
+            if (result == null)
+                return new UserResponse("User not found");
+
+            result.DeviceToken = model.DeviceToken;
             result.LastUpdateDate = DateTime.UtcNow;
 
             try
