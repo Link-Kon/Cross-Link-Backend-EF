@@ -11,7 +11,7 @@ namespace Link_Backend_EF.Domain.Services.Communication
         public UserResponse(User resource) : base(resource)
         {   
         }
-
+    
         public UserResponse(UserData resource) : base(resource)
         {
         }
